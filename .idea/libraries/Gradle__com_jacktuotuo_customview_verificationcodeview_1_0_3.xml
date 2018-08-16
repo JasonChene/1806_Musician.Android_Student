@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.jacktuotuo.customview:verificationcodeview-1.0.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/verificationcodeview-1.0.3.aar/836e7d5688b7d127c68cd5716d2b94ca/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/verificationcodeview-1.0.3.aar/836e7d5688b7d127c68cd5716d2b94ca/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jacktuotuo.customview/verificationcodeview/1.0.3/6a0fadfa335ae7e89cfa1dbf17e05b358c5dfd45/verificationcodeview-1.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

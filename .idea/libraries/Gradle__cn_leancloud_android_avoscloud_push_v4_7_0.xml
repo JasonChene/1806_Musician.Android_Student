@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: cn.leancloud.android:avoscloud-push-v4.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/avoscloud-push-v4.7.0.aar/d7ed636bb26ee12d7f96328c0c077ddb/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/avoscloud-push-v4.7.0.aar/d7ed636bb26ee12d7f96328c0c077ddb/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
