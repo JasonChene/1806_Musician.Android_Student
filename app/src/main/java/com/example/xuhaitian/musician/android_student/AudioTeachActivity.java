@@ -308,6 +308,9 @@ public class AudioTeachActivity extends AppCompatActivity {
 //                if (main_draw.getVisibility() == GONE) {
                 final FrameLayout remote_video = findViewById(R.id.remote_video_view_container);
                 if (remote_video.getVisibility() == GONE) {
+//                    leaveChannel();
+                    sendMessageToTeacher("studentOffline","studentOffline");
+
                     finish();
                     startActivity(new Intent(AudioTeachActivity.this, MainActivity.class));
                 } else {
