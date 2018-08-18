@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/who_be_teach"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#101010"
+            android:text="dsasfgs"
+            android:textSize="14dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/remote_video_view_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="36dp"
+            android:background="@android:color/darker_gray"
+            android:visibility="gone" />
+        <FrameLayout
+            android:id="@+id/remote_video_view_container_second"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="36dp"
+            android:background="@android:color/darker_gray"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/local_video_view_container"
+            android:layout_width="85dp"
+            android:layout_height="136dp"
+            android:layout_marginTop="36dp"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/holo_red_dark"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <View
+            android:id="@+id/music_picture"
+            android:layout_width="260dp"
+            android:layout_height="260dp"
+            android:layout_marginTop="42dp"
+            android:background="@drawable/audio_teach_bg"
+            android:visibility="visible"
+            >
+        </View>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/open_whiteboard_button"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/btn_shape"
+            android:orientation="horizontal"
+            android:text="打开乐谱"
+            android:radius="10dp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/hands_up_button"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="7dp"
+            android:background="@drawable/btn_shape"
+            android:orientation="horizontal"
+            android:text="举手"
+            android:radius="10dp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+
+    <!--<View-->
+        <!--android:id="@+id/drawBackgroud"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--android:visibility="gone"/>-->
+    <!--<com.example.xuhaitian.musician.android_student.CustomView.Draw-->
+        <!--android:id="@+id/main_draw"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="#00ffffff"-->
+        <!--android:visibility="gone"/>-->
+    <!--<com.example.xuhaitian.musician.android_student.CustomView.Draw-->
+        <!--android:id="@+id/peer_draw"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:visibility="gone"/>-->
+
+</android.support.constraint.ConstraintLayout>

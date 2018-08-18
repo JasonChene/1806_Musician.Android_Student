@@ -51,9 +51,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
         SysExitUtil.activityList.add(VerificationCodeActivity.this);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
         StrictMode.setThreadPolicy(policy);
-
         initActionBar();
         countDownTimerTextView = findViewById(R.id.count_down_timer);
         countDownTimer = new CountDownTimer(60 * 1000, 1000) {
