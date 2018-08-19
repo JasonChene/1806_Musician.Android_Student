@@ -82,13 +82,12 @@ public class AudioTeachActivity extends AppCompatActivity {
     String Channel_name = "";
     MyLeanCloudApp myApp;
     JSONObject mArrStudentInfo;
-        private CustomMessageHandler customMessageHandler;
-    TextView showHandupInfo;
+    private CustomMessageHandler customMessageHandler;
     private IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
         @Override
         public void onJoinChannelSuccess(String channel, int uid, int elapsed) {
             super.onJoinChannelSuccess(channel, uid, elapsed);
-            Log.e(LOG_TAG, uid + ":onJoinChannelSuccess" + channel);
+            Log.e(LOG_TAG, uid + ":onJoinChannelSuccess" + Channel_name);
         }
 
         @Override
@@ -97,10 +96,58 @@ public class AudioTeachActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     setupRemoteVideo(uid);
+//                    setupLocalVideo(uid);
                     Log.e(LOG_TAG, uid + ":onFirstRemoteVideoDecoded");
                 }
             });
         }
+        @Override
+        public void onUserEnableVideo(int uid, boolean enabled){
+//            Log.e("VIDEO", "........................１"+enabled);
+//            Log.e("VIDEO", "........................１"+uid);
+//            if ( true==enabled ){
+//                Log.e("VIDEO", "........................２");
+//
+//                open_Video();
+//
+//            }
+//            else {
+//                Log.e("VIDEO", "........................３");
+//
+//                close_Video();
+//
+//            }
+            final boolean video =enabled;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if ( true==video ){
+                        open_Video();
+                    }
+                    else {
+                        close_Video();
+                    }
+
+                }
+            });
+
+
+        }
+//        public void onUserMuteVideo(int uid, boolean muted){
+//            Log.e("VIDEO", "........................２");
+//
+//
+//            if (muted== true){
+//                open_Video();
+//                Log.e("VIDEO", "........................２111111111");
+//
+//            }
+//            else {
+//                close_Video();
+//                Log.e("VIDEO", ".......................２.2222222222222");
+//
+//            }
+//        }
     };
 //    private Handler handler = new Handler() {
 //        @Override
@@ -238,14 +285,17 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
 //        drawBackgroud = findViewById(R.id.drawBackgroud);
         if (mRtcEngine == null && checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)) {
-            initAgoraEngineAndJoinChannel(9998);
-            mRtcEngine.disableVideo();
+
+            initAgoraEngineAndJoinChannel(9999);
+            mRtcEngine.enableVideo();
             mRtcEngine.setEnableSpeakerphone(true);
-            FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-            container.setVisibility(GONE);
-           sendMessageToTeacher("studentOnline","studentOnline");
+            FrameLayout local_video_view_container = (FrameLayout) findViewById(R.id.local_video_view_container);
+            local_video_view_container.setVisibility(View.GONE);
+            FrameLayout remote_video_view_container = (FrameLayout) findViewById(R.id.remote_video_view_container);
+            remote_video_view_container.setVisibility(View.GONE);
+            sendMessageToTeacher("studentOnline", "studentOnline");
             //注册默认的消息处理逻辑
-          AVIMMessageManager.registerDefaultMessageHandler(new AudioTeachActivity.CustomMessageHandler());
+            AVIMMessageManager.registerDefaultMessageHandler(new AudioTeachActivity.CustomMessageHandler());
             customMessageHandler = new CustomMessageHandler();
             customMessageHandler.setIsOpen(true);
             AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
@@ -258,6 +308,9 @@ public class AudioTeachActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
     //初始化进入房间
     private void initAgoraEngineAndJoinChannel(int uid) {
@@ -308,9 +361,8 @@ public class AudioTeachActivity extends AppCompatActivity {
 //                if (main_draw.getVisibility() == GONE) {
                 final FrameLayout remote_video = findViewById(R.id.remote_video_view_container);
                 if (remote_video.getVisibility() == GONE) {
-//                    leaveChannel();
                     sendMessageToTeacher("studentOffline","studentOffline");
-
+                    leaveChannel();
                     finish();
                     startActivity(new Intent(AudioTeachActivity.this, MainActivity.class));
                 } else {
@@ -364,12 +416,21 @@ public class AudioTeachActivity extends AppCompatActivity {
             showMusicPicture();
             mRtcEngine.disableVideo();
             FrameLayout container_local = (FrameLayout) findViewById(R.id.local_video_view_container);
-            container_local.setVisibility(GONE);
+            container_local.setVisibility(View.GONE);
             FrameLayout container_remote = (FrameLayout) findViewById(R.id.remote_video_view_container);
-            container_remote.setVisibility(GONE);
+            container_remote.setVisibility(View.GONE);
         }
     }
-
+    private void open_Video() {
+        if (checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA)) {
+            hideMusicPicture();
+            mRtcEngine.enableVideo();
+            FrameLayout container_local = (FrameLayout) findViewById(R.id.local_video_view_container);
+            container_local.setVisibility(View.VISIBLE);
+            FrameLayout container_remote = (FrameLayout) findViewById(R.id.remote_video_view_container);
+            container_remote.setVisibility(View.VISIBLE);
+        }
+    }
     private void setupLocalVideo(int uid) {
         FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
         container.setVisibility(View.VISIBLE);
@@ -429,37 +490,38 @@ public class AudioTeachActivity extends AppCompatActivity {
 //        }
 //    }
 
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        final FrameLayout local_video = findViewById(R.id.local_video_view_container);
-//        /* 返回键 */
-//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        final FrameLayout local_video = findViewById(R.id.local_video_view_container);
+        /* 返回键 */
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
 //            if (main_draw.getVisibility() == GONE) {
-//                if (local_video.getVisibility() == GONE) {
-//                    this.finish();
-//                    startActivity(new Intent(AudioTeachActivity.this, MainActivity.class));
-//                } else {
-//                    Toast.makeText(AudioTeachActivity.this, "现在正在与学生教学", Toast.LENGTH_SHORT).show();
-//                    return false;
-//                }
+                if (local_video.getVisibility() == GONE) {
+                    sendMessageToTeacher("studentOffline","studentOffline");
+                    this.finish();
+                    startActivity(new Intent(AudioTeachActivity.this, MainActivity.class));
+                } else {
+                    Toast.makeText(AudioTeachActivity.this, "现在正在与学生教学", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
 //            } else {
 //                Toast.makeText(AudioTeachActivity.this, "现在正在与学生教学", Toast.LENGTH_SHORT).show();
 //                return false;
 //            }
-//        }
-//        return super.onKeyDown(keyCode,event);
-//    }
+        }
+        return super.onKeyDown(keyCode,event);
+    }
 
-//    @Override
-//    protected void onDestroy() {
-//        Log.e("TAG", "onDestroy");
-//        leaveChannel();
-//        mRtcEngine.destroy();
-//        sendMessageToStudents("通知学生老师下线","老师下线");
-//        customMessageHandler.setIsOpen(false);
-//        AVIMMessageManager.unregisterMessageHandler(AVIMMessage.class, customMessageHandler);
-//        super.onDestroy();
-//    }
+    @Override
+    protected void onDestroy() {
+        Log.e("TAG", "onDestroy");
+        leaveChannel();
+        mRtcEngine.destroy();
+        sendMessageToTeacher("通知老师学生下线","学生下线");
+        customMessageHandler.setIsOpen(false);
+        AVIMMessageManager.unregisterMessageHandler(AVIMMessage.class, customMessageHandler);
+        super.onDestroy();
+    }
 
     public class CustomMessageHandler extends AVIMMessageHandler {
         //即时通讯
@@ -483,7 +545,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                     if (((AVIMTextMessage) message).getText().equals("老师上线"))
                     {
                         Log.e("1", " 老师上线");
-                        textview.setText("老师上线");
+                        textview.setText("正在和"+teacher_name +"乐谱教学");
                         sendMessageToTeacher("成功收到老师上线通知","成功收到老师上线通知");
 
                     }
@@ -536,31 +598,3 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
     }
 }
-//#pragma mark - AVIMClientDelegate
-//// 接收消息的回调函数
-//        - (void)conversation:(AVIMConversation *)conversation didReceiveTypedMessage:(AVIMTypedMessage *)message {
-//        NSLog(@"%@", message.text); // 耗子，起床！
-//        if ([message.text isEqualToString:@"老师上线"])
-//        {
-//        [self showAllTextDialog:@"老师已上线" :1];
-//        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
-//        AVIMTextMessage *reply = [AVIMTextMessage messageWithText:@"成功收到老师上线通知" attributes:nil];
-//        [conversation sendMessage:reply callback:^(BOOL succeeded, NSError *error) {
-//        if (succeeded) {
-//        NSLog(@"回复成功！");
-//        }
-//        }];
-//        }
-//        else if ([message.text isEqualToString:@"收到学生上线通知"])
-//        {
-//        mTitleDescription.text = [NSString stringWithFormat:@"%@正在和你乐谱教学",mTeacherName];
-//        }
-//        else if ([message.text isEqualToString:@"老师下线"])
-//        {
-//        mTitleDescription.text = @"老师已下线";
-//        }
-//        }
-
-
-
-
