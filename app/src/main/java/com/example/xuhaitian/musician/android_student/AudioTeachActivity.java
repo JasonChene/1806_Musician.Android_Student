@@ -103,20 +103,6 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
         @Override
         public void onUserEnableVideo(int uid, boolean enabled){
-//            Log.e("VIDEO", "........................１"+enabled);
-//            Log.e("VIDEO", "........................１"+uid);
-//            if ( true==enabled ){
-//                Log.e("VIDEO", "........................２");
-//
-//                open_Video();
-//
-//            }
-//            else {
-//                Log.e("VIDEO", "........................３");
-//
-//                close_Video();
-//
-//            }
             final boolean video =enabled;
             runOnUiThread(new Runnable() {
                 @Override
@@ -133,21 +119,6 @@ public class AudioTeachActivity extends AppCompatActivity {
 
 
         }
-//        public void onUserMuteVideo(int uid, boolean muted){
-//            Log.e("VIDEO", "........................２");
-//
-//
-//            if (muted== true){
-//                open_Video();
-//                Log.e("VIDEO", "........................２111111111");
-//
-//            }
-//            else {
-//                close_Video();
-//                Log.e("VIDEO", ".......................２.2222222222222");
-//
-//            }
-//        }
     };
 //    private Handler handler = new Handler() {
 //        @Override
@@ -451,44 +422,44 @@ public class AudioTeachActivity extends AppCompatActivity {
         MusicPicture.setVisibility(View.VISIBLE);
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {//根据请求码判断是哪一次申请的权限
-//            case PERMISSION_REQ_ID_RECORD_AUDIO:
-//                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
-//                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
-//                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
-//                        checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA);
-//                    } else {//用户拒绝授权
-//                        //可以简单提示用户
-//                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                break;
-//            case PERMISSION_REQ_ID_CAMERA:
-//                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
-//                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
-//                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
-//                        initAgoraEngineAndJoinChannel(9998);
-//                        mRtcEngine.disableVideo();
-//                        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-//                        container.setVisibility(GONE);
-//                        //注册默认的消息处理逻辑
-////                        customMessageHandler = new CustomMessageHandler();
-////                        customMessageHandler.setIsOpen(true);
-////                        AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
-////                        //通知学生老师上线
-////                        sendMessageToStudents("通知学生老师在线","老师上线");
-//                    } else {//用户拒绝授权
-//                        //可以简单提示用户
-//                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                break;
-//            default:
-//                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {//根据请求码判断是哪一次申请的权限
+            case PERMISSION_REQ_ID_RECORD_AUDIO:
+                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
+                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
+                        checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA);
+                    } else {//用户拒绝授权
+                        //可以简单提示用户
+                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            case PERMISSION_REQ_ID_CAMERA:
+                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
+                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
+                        initAgoraEngineAndJoinChannel(9999);
+                        mRtcEngine.disableVideo();
+                        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
+                        container.setVisibility(GONE);
+                        //注册默认的消息处理逻辑
+                        customMessageHandler = new CustomMessageHandler();
+                        customMessageHandler.setIsOpen(true);
+                        AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
+//                        //通知学生老师上线
+                        sendMessageToTeacher("studentOnline", "studentOnline");
+                    } else {//用户拒绝授权
+                        //可以简单提示用户
+                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -501,7 +472,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                     this.finish();
                     startActivity(new Intent(AudioTeachActivity.this, MainActivity.class));
                 } else {
-                    Toast.makeText(AudioTeachActivity.this, "现在正在与学生教学", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AudioTeachActivity.this, "现在正在与老师视频", Toast.LENGTH_SHORT).show();
                     return false;
                 }
 //            } else {

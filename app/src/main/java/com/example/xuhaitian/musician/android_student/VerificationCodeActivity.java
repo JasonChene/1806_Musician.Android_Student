@@ -129,9 +129,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                                                     try {
                                                         avUser.put("netEaseUserInfo",netEaseUserInfo.get("data"));
                                                         AVUser.changeCurrentUser(avUser,true);
-
-//                                                        openLeancloudIM(avUser);
-
+                                                        openLeancloudIM(avUser);
                                                         startActivity(new Intent(VerificationCodeActivity.this, MainActivity.class));
                                                     }catch (JSONException error)
                                                     {
@@ -164,7 +162,7 @@ public class VerificationCodeActivity extends AppCompatActivity {
                                             }
                                         }
                                         if (allRoes == true) {
-//                                            openLeancloudIM(avUser);
+                                            openLeancloudIM(avUser);
                                             startActivity(new Intent(VerificationCodeActivity.this, MainActivity.class));
                                             Toast.makeText(VerificationCodeActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
 
@@ -206,24 +204,24 @@ public class VerificationCodeActivity extends AppCompatActivity {
             }   
         });
     }
-//    public void openLeancloudIM(AVUser user)
-//    {
-//        MyLeanCloudApp app = (MyLeanCloudApp)getApplication();
-//        app.client = AVIMClient.getInstance(user.getObjectId());
-//        // 与服务器连接
-//        app.client.open(new AVIMClientCallback() {
-//            @Override
-//            public void done(AVIMClient client, AVIMException e) {
-//                if (e == null) {
-//                    Log.e("TAg","leancloud 即时消息打开成功");
-//                }
-//                else
-//                {
-//                    Log.e("TAg","leancloud 即时消息打开失败"+e.toString());
-//                }
-//            }
-//        });
-//    }
+    public void openLeancloudIM(AVUser user)
+    {
+        MyLeanCloudApp app = (MyLeanCloudApp)getApplication();
+        app.client = AVIMClient.getInstance(user.getObjectId());
+        // 与服务器连接
+        app.client.open(new AVIMClientCallback() {
+            @Override
+            public void done(AVIMClient client, AVIMException e) {
+                if (e == null) {
+                    Log.e("TAg","leancloud 即时消息打开成功");
+                }
+                else
+                {
+                    Log.e("TAg","leancloud 即时消息打开失败"+e.toString());
+                }
+            }
+        });
+    }
     public void initActionBar() {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {

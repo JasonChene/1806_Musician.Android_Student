@@ -1,4 +1,11 @@
-*/.DS_Store
+*.iml
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
 .DS_Store
-*/.idea/
-.idea/
+/.idea/
+/build
+/captures
+.externalNativeBuild
