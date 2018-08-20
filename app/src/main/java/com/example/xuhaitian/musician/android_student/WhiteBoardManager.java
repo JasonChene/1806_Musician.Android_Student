@@ -41,6 +41,7 @@ public class WhiteBoardManager {
             public void onEvent(RTSCalleeAckEvent rtsCalleeAckEvent) {
                 if (rtsCalleeAckEvent.getEvent() == RTSEventType.CALLEE_ACK_AGREE) {
                     // 判断SDK自动开启通道是否成功
+                    Log.d("收到数据", "registerCalleeAckNotification ");
                     if (!rtsCalleeAckEvent.isTunReady()) {
                         return;
                     }
@@ -144,7 +145,7 @@ public class WhiteBoardManager {
                         if (Integer.valueOf(data.substring(0,1)) == 1)
                         {
                             tag = "m";
-                        }else if (Integer.valueOf(data.substring(0,1)) == 2)
+                        }else if (Integer.valueOf(data.substring(0,1)) == 3)
                         {
                             tag = "l";
                         }
@@ -198,7 +199,7 @@ public class WhiteBoardManager {
             RTSTunData channelData = new RTSTunData(sessionId, toAccount, data.getBytes
                     ("UTF-8"), data.getBytes().length);
             boolean b = RTSManager.getInstance().sendData(channelData);
-            Log.i("白板发送数据： ", data);
+            Log.i("白板发送数据： ", b+data);
         } catch (UnsupportedEncodingException e) {
             Log.e("Transaction", "send to remote, getBytes exception : " + data);
         }

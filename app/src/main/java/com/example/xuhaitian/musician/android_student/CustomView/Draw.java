@@ -120,7 +120,7 @@ public class Draw extends SurfaceView implements SurfaceHolder.Callback,View.OnT
                 y = event.getY();       //获取触摸点Y轴坐标
                 path.lineTo(x,y);
                 timeStamp = getTime();  //获取时间戳
-                dataProcessed = "3"+":"+x/width+","+y/height+";" + "5:" + (refPacketID++) + ",0";  //数据打包
+                dataProcessed = "2"+":"+x/width+","+y/height+";" + "5:" + (refPacketID++) + ",0";  //数据打包
                 draw();
                 WhiteBoardManager.sendToRemote(sessionID,toAccount,dataProcessed); //发送封装好的数据
                 break;
