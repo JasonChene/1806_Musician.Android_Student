@@ -298,6 +298,18 @@ public class AudioTeachActivity extends AppCompatActivity {
                 openMusicWhiteBoard();
             }
         });
+
+        Button close_music = (Button)findViewById(R.id.close_music);
+        close_music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WhiteBoardManager.close(main_draw.sessionID,AudioTeachActivity.this);
+                view.setVisibility(View.GONE);
+                drawBackgroud.setVisibility(View.GONE);
+                main_draw.setVisibility(View.GONE);
+                peer_draw.setVisibility(View.GONE);
+            }
+        });
     }
 
     public void openMusicWhiteBoard()
@@ -326,6 +338,8 @@ public class AudioTeachActivity extends AppCompatActivity {
                     Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
                     //注册主叫方收到被叫相应的回调
                     WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
+                    Button close_music = (Button)findViewById(R.id.close_music);
+                    close_music.setVisibility(View.VISIBLE);
                 }
 
                 @Override
@@ -338,10 +352,6 @@ public class AudioTeachActivity extends AppCompatActivity {
                     Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
                 }
             });
-//            if (sessionId == null) {
-//                // 发起会话失败,音频通道同时只能有一个会话开启
-//                Toast.makeText(AudioTeachActivity.this,"发起打开乐谱失败",Toast.LENGTH_SHORT).show();
-//            }
         }
         else {
             Toast.makeText(AudioTeachActivity.this,"打开乐谱失败，请确认老师是否接受你的乐谱教学请求...",Toast.LENGTH_SHORT).show();

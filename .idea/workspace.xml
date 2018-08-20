@@ -20,8 +20,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/CustomView/Draw.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/CustomView/Draw.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/WhiteBoardManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/WhiteBoardManager.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,11 +43,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AudioTeachActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AudioTeachActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="315" column="17" lean-forward="false" selection-start-line="315" selection-start-column="17" selection-end-line="315" selection-end-column="17" />
+            <state relative-caret-position="402">
+              <caret line="309" column="49" lean-forward="false" selection-start-line="309" selection-start-column="49" selection-end-line="309" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4612#4613#0" expanded="true" />
@@ -56,8 +55,8 @@
                 <element signature="e#4722#4723#0" expanded="true" />
                 <element signature="e#4765#4766#0" expanded="true" />
                 <element signature="e#4774#4821#0" expanded="false" />
-                <element signature="e#17852#17853#0" expanded="true" />
-                <element signature="e#17893#17894#0" expanded="true" />
+                <element signature="e#18323#18324#0" expanded="true" />
+                <element signature="e#18364#18365#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WhiteBoardManager.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="WhiteBoardManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/WhiteBoardManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="154" column="43" lean-forward="true" selection-start-line="154" selection-start-column="43" selection-end-line="154" selection-end-column="43" />
+            <state relative-caret-position="-225">
+              <caret line="181" column="2" lean-forward="false" selection-start-line="181" selection-start-column="2" selection-end-line="181" selection-end-column="2" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,8 +116,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="118" column="34" lean-forward="false" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="34" />
+            <state relative-caret-position="416">
+              <caret line="114" column="40" lean-forward="false" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -204,8 +203,8 @@
       <find>.Draw</find>
       <find>registerCalleeAckNotification</find>
       <find>白板发送数据</find>
-      <find>registerRTSCloseObserver</find>
       <find>sendToRemote</find>
+      <find>registerRTSCloseObserver</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2259,10 +2258,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/MyLeanCloudApp.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/CustomView/Draw.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/WhiteBoardManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
       </list>
     </option>
   </component>
@@ -2526,6 +2525,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="817" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2994,34 +2994,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="118" column="34" lean-forward="false" selection-start-line="118" selection-start-column="20" selection-end-line="118" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="315" column="17" lean-forward="false" selection-start-line="315" selection-start-column="17" selection-end-line="315" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4612#4613#0" expanded="true" />
-            <element signature="e#4655#4656#0" expanded="true" />
-            <element signature="e#4722#4723#0" expanded="true" />
-            <element signature="e#4765#4766#0" expanded="true" />
-            <element signature="e#4774#4821#0" expanded="false" />
-            <element signature="e#17852#17853#0" expanded="true" />
-            <element signature="e#17893#17894#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/manager/DataManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -3044,12 +3016,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="114" column="40" lean-forward="false" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/WhiteBoardManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="154" column="43" lean-forward="true" selection-start-line="154" selection-start-column="43" selection-end-line="154" selection-end-column="43" />
+        <state relative-caret-position="-225">
+          <caret line="181" column="2" lean-forward="false" selection-start-line="181" selection-start-column="2" selection-end-line="181" selection-end-column="2" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="309" column="49" lean-forward="false" selection-start-line="309" selection-start-column="49" selection-end-line="309" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4612#4613#0" expanded="true" />
+            <element signature="e#4655#4656#0" expanded="true" />
+            <element signature="e#4722#4723#0" expanded="true" />
+            <element signature="e#4765#4766#0" expanded="true" />
+            <element signature="e#4774#4821#0" expanded="false" />
+            <element signature="e#18323#18324#0" expanded="true" />
+            <element signature="e#18364#18365#0" expanded="true" />
           </folding>
         </state>
       </provider>
