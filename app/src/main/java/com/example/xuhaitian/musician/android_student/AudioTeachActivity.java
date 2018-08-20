@@ -4,14 +4,17 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -68,6 +71,7 @@ import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
 
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 
 public class AudioTeachActivity extends AppCompatActivity {
@@ -77,6 +81,7 @@ public class AudioTeachActivity extends AppCompatActivity {
     private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
     private static final int PERMISSION_REQ_ID_CAMERA = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
     private static final String LOG_TAG = "LOG_TAG";
+    private static final int IMAGE_REQUEST_CODE = 1001;
     RtcEngine mRtcEngine = null;
     Draw main_draw;
     View drawBackgroud;
@@ -312,46 +317,86 @@ public class AudioTeachActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e(":",requestCode +":"+resultCode+":");
+        //在相册里面选择好相片之后调回到现在的这个activity中
+        switch (requestCode) {
+            case IMAGE_REQUEST_CODE://这里的requestCode是我自己设置的，就是确定返回到那个Activity的标志
+                if (resultCode == RESULT_OK) {//resultcode是setResult里面设置的code值
+                    try {
+                        Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = getContentResolver().query(selectedImage,
+                                filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                        cursor.moveToFirst();
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                        String path = cursor.getString(columnIndex);  //获取照片路径
+                        cursor.close();
+                        Log.e("path",path);
+                        Bitmap bitmap = BitmapFactory.decodeFile(path);
+                        Log.e("bitmap",bitmap.toString());
+                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
+                        showMusicWhiteBoard();
+                    } catch (Exception e) {
+                        // TODO Auto-generatedcatch block
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+    }
+
+    public void showMusicWhiteBoard(){
+        //打开白板
+        drawBackgroud.setBackgroundColor(Color.WHITE);
+        drawBackgroud.setVisibility(View.VISIBLE);
+        main_draw.setVisibility(View.VISIBLE);
+        peer_draw.setVisibility(View.VISIBLE);
+        List<RTSTunnelType> types = new ArrayList<>(1);
+        types.add(RTSTunnelType.DATA);
+        String teacherID = "";
+        try {
+            teacherID = mCourseInfo.getString("teacherID");
+        }
+        catch (JSONException e){
+
+        }
+        final String eastAccount = teacherID;
+        String sessionId = RTSManager.getInstance().start(eastAccount, types, null, null, new RTSCallback<RTSData>() {
+            @Override
+            public void onSuccess(RTSData rtsData) {
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
+                //注册主叫方收到被叫相应的回调
+                WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
+                Button close_music = (Button)findViewById(R.id.close_music);
+                close_music.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailed(int code) {
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话失败，错误码"+ code, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     public void openMusicWhiteBoard()
     {
         Log.e("Tag","打开白板");
-        if (isJoinInRoom == true)
-        {
-            //打开白板
-            drawBackgroud.setBackgroundColor(Color.WHITE);
-            drawBackgroud.setVisibility(View.VISIBLE);
-            main_draw.setVisibility(View.VISIBLE);
-            peer_draw.setVisibility(View.VISIBLE);
-            List<RTSTunnelType> types = new ArrayList<>(1);
-            types.add(RTSTunnelType.DATA);
-            String teacherID = "";
-            try {
-                teacherID = mCourseInfo.getString("teacherID");
-            }
-            catch (JSONException e){
+        if (isJoinInRoom == true) {
 
-            }
-            final String eastAccount = teacherID;
-            String sessionId = RTSManager.getInstance().start(eastAccount, types, null, null, new RTSCallback<RTSData>() {
-                @Override
-                public void onSuccess(RTSData rtsData) {
-                    Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
-                    //注册主叫方收到被叫相应的回调
-                    WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
-                    Button close_music = (Button)findViewById(R.id.close_music);
-                    close_music.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onFailed(int code) {
-                    Toast.makeText(AudioTeachActivity.this, "发起白板会话失败，错误码"+ code, Toast.LENGTH_SHORT).show();
-                }
-
-                @Override
-                public void onException(Throwable exception) {
-                    Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
-                }
-            });
+            Intent intent = new Intent(
+                    Intent.ACTION_PICK,
+                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(intent, IMAGE_REQUEST_CODE);
         }
         else {
             Toast.makeText(AudioTeachActivity.this,"打开乐谱失败，请确认老师是否接受你的乐谱教学请求...",Toast.LENGTH_SHORT).show();
