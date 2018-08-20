@@ -38,12 +38,15 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
-//import com.example.xuhaitian.musician.android_student.CustomView.Draw;
+import com.example.xuhaitian.musician.android_student.CustomView.Draw;
 import com.example.xuhaitian.musician.android_student.common.SysExitUtil;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.rts.RTSManager;
 import com.netease.nimlib.sdk.rts.model.RTSCommonEvent;
 import com.netease.nimlib.sdk.rts.model.RTSTunData;
+import com.netease.nimlib.sdk.rts.constant.RTSTunnelType;
+import com.netease.nimlib.sdk.rts.RTSCallback;
+import com.netease.nimlib.sdk.rts.model.RTSData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,13 +78,14 @@ public class AudioTeachActivity extends AppCompatActivity {
     private static final int PERMISSION_REQ_ID_CAMERA = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
     private static final String LOG_TAG = "LOG_TAG";
     RtcEngine mRtcEngine = null;
-    //    Draw main_draw;
+    Draw main_draw;
     View drawBackgroud;
-    //    Draw peer_draw;
+    Draw peer_draw;
     String teacher_name;
     String Channel_name = "";
     MyLeanCloudApp myApp;
-    JSONObject mArrStudentInfo;
+    JSONObject mCourseInfo;
+    Boolean isJoinInRoom = false;
     private CustomMessageHandler customMessageHandler;
     private IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
         @Override
@@ -118,6 +122,14 @@ public class AudioTeachActivity extends AppCompatActivity {
             });
 
 
+        }
+        public void onUserOffline(int uid, int reason)
+        {
+            isJoinInRoom = true;
+        }
+        public void onUserJoined( int uid, int elapsed )
+        {
+            isJoinInRoom = true;
         }
     };
 //    private Handler handler = new Handler() {
@@ -235,26 +247,26 @@ public class AudioTeachActivity extends AppCompatActivity {
         initActionBar();
         myApp = (MyLeanCloudApp) getApplication();
         myApp.setAudioTeachActivity(AudioTeachActivity.this);
-//        main_draw = findViewById(R.id.main_draw);
-//        peer_draw = findViewById(R.id.peer_draw);
+        main_draw = findViewById(R.id.main_draw);
+        peer_draw = findViewById(R.id.peer_draw);
         //接受传过来的课程信息
         Intent intent = getIntent();
         String teacher_info = intent.getStringExtra("teacher_info");
         Log.e("teacher_info", "" + teacher_info);
         try {
-            mArrStudentInfo = new JSONObject(teacher_info);
+            mCourseInfo = new JSONObject(teacher_info);
         } catch (JSONException error) {
             Log.e("error", "错误信息" + error);
         }
         try {
-            Channel_name = mArrStudentInfo.getString("student_id");
-            teacher_name = mArrStudentInfo.getString("teacher_name");
+            Channel_name = mCourseInfo.getString("student_id");
+            teacher_name = mCourseInfo.getString("teacher_name");
             Log.e("id", "" + teacher_name);
 
         } catch (JSONException e) {
             Log.e("error", "错误信息" + e);
         }
-//        drawBackgroud = findViewById(R.id.drawBackgroud);
+        drawBackgroud = findViewById(R.id.drawBackgroud);
         if (mRtcEngine == null && checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)) {
 
             initAgoraEngineAndJoinChannel(9999);
@@ -271,15 +283,87 @@ public class AudioTeachActivity extends AppCompatActivity {
             customMessageHandler.setIsOpen(true);
             AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
         }
-        Button back_button = (Button) findViewById(R.id.hands_up_button);
-        back_button.setOnClickListener(new View.OnClickListener() {
+        Button handup_button = (Button) findViewById(R.id.hands_up_button);
+        handup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessageToTeacher("HandUp","HandUp");
             }
         });
+
+        Button openMusicBtn = (Button)findViewById(R.id.open_whiteboard_button);
+        openMusicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMusicWhiteBoard();
+            }
+        });
     }
 
+    public void openMusicWhiteBoard()
+    {
+        Log.e("Tag","打开白板");
+        if (isJoinInRoom == true)
+        {
+            //打开白板
+            drawBackgroud.setBackgroundColor(Color.WHITE);
+            drawBackgroud.setVisibility(View.VISIBLE);
+            main_draw.setVisibility(View.VISIBLE);
+            peer_draw.setVisibility(View.VISIBLE);
+            List<RTSTunnelType> types = new ArrayList<>(1);
+            types.add(RTSTunnelType.DATA);
+            String teacherID = "";
+            try {
+                teacherID = mCourseInfo.getString("teacherID");
+            }
+            catch (JSONException e){
+
+            }
+            final String eastAccount = teacherID;
+            String sessionId = RTSManager.getInstance().start(eastAccount, types, null, null, new RTSCallback<RTSData>() {
+                @Override
+                public void onSuccess(RTSData rtsData) {
+                    Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
+                    //注册主叫方收到被叫相应的回调
+                    WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
+                }
+
+                @Override
+                public void onFailed(int code) {
+                    Toast.makeText(AudioTeachActivity.this, "发起白板会话失败，错误码"+ code, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onException(Throwable exception) {
+                    Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
+                }
+            });
+//            if (sessionId == null) {
+//                // 发起会话失败,音频通道同时只能有一个会话开启
+//                Toast.makeText(AudioTeachActivity.this,"发起打开乐谱失败",Toast.LENGTH_SHORT).show();
+//            }
+        }
+        else {
+            Toast.makeText(AudioTeachActivity.this,"打开乐谱失败，请确认老师是否接受你的乐谱教学请求...",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void startKeepUpBoard(String sessionID, String toAccount) {
+        main_draw.sessionID = sessionID;     //参数传递
+        main_draw.toAccount = toAccount;     //参数传递
+        main_draw.setVisibility(View.VISIBLE);
+        peer_draw.sessionID = sessionID;
+        peer_draw.toAccount = toAccount;
+        peer_draw.setVisibility(View.VISIBLE);
+        drawBackgroud.setVisibility(View.VISIBLE);
+
+        //注册收到数据的监听
+        WhiteBoardManager.registerIncomingData(sessionID, true, main_draw, AudioTeachActivity.this);
+//        WhiteBoardManager.registerRTSCloseObserver(sessionID, true, AudioTeachActivity.this);
+        //隐藏本地视频窗口
+        FrameLayout local_container = (FrameLayout) findViewById(R.id.local_video_view_container);
+        local_container.setVisibility(GONE);
+    }
 
 
 
@@ -544,7 +628,7 @@ public class AudioTeachActivity extends AppCompatActivity {
     public void sendMessageToTeacher(final String msgName, final String msgtext) {
         try {
             List<String> list = new ArrayList();
-            list.add(mArrStudentInfo.getString("teacherID"));
+            list.add(mCourseInfo.getString("teacherID"));
             myApp.client.createConversation(list, msgName, null,
                     new AVIMConversationCreatedCallback() {
                         @Override
