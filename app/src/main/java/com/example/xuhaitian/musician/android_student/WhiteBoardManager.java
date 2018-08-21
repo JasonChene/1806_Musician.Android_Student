@@ -142,6 +142,12 @@ public class WhiteBoardManager {
                     try {
                         data = new String(rtsTunData.getData(), 0, rtsTunData.getLength(), "UTF-8");
                         String tag = "";
+                        if (data.equals("clear"))
+                        {
+                            AudioTeachActivity audioTeachActivity = (AudioTeachActivity)context;
+                            audioTeachActivity.clearMusicPicture();
+                            return;
+                        }
                         if (Integer.valueOf(data.substring(0,1)) == 1)
                         {
                             tag = "m";
@@ -149,6 +155,7 @@ public class WhiteBoardManager {
                         {
                             tag = "l";
                         }
+
                         DataManager dataManager = new DataManager();
                         dataManager.dataDecode(data);
 
@@ -164,6 +171,7 @@ public class WhiteBoardManager {
                         else {
                             Toast.makeText(context,"正在准备乐谱",Toast.LENGTH_SHORT);
                         }
+
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

@@ -33,6 +33,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
@@ -57,6 +60,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -341,12 +345,8 @@ public class AudioTeachActivity extends AppCompatActivity {
                         Log.e("path",path);
                         Bitmap bitmap = BitmapFactory.decodeFile(path);
                         Log.e("bitmap",bitmap.toString());
-//                        ImageView music_draw_white = (ImageView)findViewById(R.id.music_draw_white);
-//                        drawBackgroud.setImageBitmap(bitmap);
-//                        drawBackgroud.setVisibility(View.VISIBLE);
                         drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
-                        Log.e("bitmap","====================");
-//                        showMusicWhiteBoard();
+                        uploadMusicImage(path);
                     } catch (Exception e) {
                         // TODO Auto-generatedcatch block
                         e.printStackTrace();
@@ -394,11 +394,32 @@ public class AudioTeachActivity extends AppCompatActivity {
         });
     }
 
-    private void choosePicture(){
-        Intent pickIntent = new Intent(Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(pickIntent, IMAGE_REQUEST_CODE);
+    private void uploadMusicImage(String path){
+        try {
+            final AVFile file = AVFile.withAbsoluteLocalPath("LeanCloud.png", path);
+            file.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null)
+                    {
+                        Log.e("uploadURL", file.getUrl());//返回一个唯一的 Url 地址
+                        String sendImageData = "0:"+file.getUrl();
+                        WhiteBoardManager.sendToRemote(main_draw.sessionID,main_draw.toAccount,sendImageData);
+                    }
+
+                }
+            });
+        }catch (FileNotFoundException err)
+        {
+
+        }
+
+    }
+
+    public void clearMusicPicture()
+    {
+        main_draw.Clear();
+        peer_draw.Clear();
     }
 
     public void openMusicWhiteBoard()
