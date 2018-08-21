@@ -84,12 +84,20 @@
     </LinearLayout>
 
 
-    <View
+    <!--<View-->
+        <!--android:id="@+id/drawBackgroud"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="36dp"-->
+        <!--&lt;!&ndash;android:visibility="gone">&ndash;&gt; music_draw_white-->
+    <!--</View>-->
+    <ImageView
         android:id="@+id/drawBackgroud"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="36dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        />
     <com.example.xuhaitian.musician.android_student.CustomView.Draw
         android:id="@+id/main_draw"
         android:layout_width="fill_parent"

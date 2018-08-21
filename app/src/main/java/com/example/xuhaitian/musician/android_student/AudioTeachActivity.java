@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -27,6 +28,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,7 +86,7 @@ public class AudioTeachActivity extends AppCompatActivity {
     private static final int IMAGE_REQUEST_CODE = 1001;
     RtcEngine mRtcEngine = null;
     Draw main_draw;
-    View drawBackgroud;
+    ImageView drawBackgroud;
     Draw peer_draw;
     String teacher_name;
     String Channel_name = "";
@@ -321,7 +323,7 @@ public class AudioTeachActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e(":",requestCode +":"+resultCode+":");
+        Log.e(":",requestCode +":"+resultCode+":" +data);
         //在相册里面选择好相片之后调回到现在的这个activity中
         switch (requestCode) {
             case IMAGE_REQUEST_CODE://这里的requestCode是我自己设置的，就是确定返回到那个Activity的标志
@@ -333,13 +335,18 @@ public class AudioTeachActivity extends AppCompatActivity {
                                 filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
                         cursor.moveToFirst();
                         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+
                         String path = cursor.getString(columnIndex);  //获取照片路径
                         cursor.close();
                         Log.e("path",path);
                         Bitmap bitmap = BitmapFactory.decodeFile(path);
                         Log.e("bitmap",bitmap.toString());
-                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
-                        showMusicWhiteBoard();
+//                        ImageView music_draw_white = (ImageView)findViewById(R.id.music_draw_white);
+                        drawBackgroud.setImageBitmap(bitmap);
+//                        drawBackgroud.setVisibility(View.VISIBLE);
+//                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
+                        Log.e("bitmap","====================");
+//                        showMusicWhiteBoard();
                     } catch (Exception e) {
                         // TODO Auto-generatedcatch block
                         e.printStackTrace();
@@ -350,8 +357,8 @@ public class AudioTeachActivity extends AppCompatActivity {
     }
 
     public void showMusicWhiteBoard(){
+        Log.e("show","showMusicWhiteBoard");
         //打开白板
-        drawBackgroud.setBackgroundColor(Color.WHITE);
         drawBackgroud.setVisibility(View.VISIBLE);
         main_draw.setVisibility(View.VISIBLE);
         peer_draw.setVisibility(View.VISIBLE);
@@ -387,16 +394,29 @@ public class AudioTeachActivity extends AppCompatActivity {
         });
     }
 
+    private void choosePicture(){
+        Intent pickIntent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(pickIntent, IMAGE_REQUEST_CODE);
+    }
 
     public void openMusicWhiteBoard()
     {
         Log.e("Tag","打开白板");
         if (isJoinInRoom == true) {
 
-            Intent intent = new Intent(
-                    Intent.ACTION_PICK,
-                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, IMAGE_REQUEST_CODE);
+            if (ActivityCompat.checkSelfPermission(AudioTeachActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(AudioTeachActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            }
+            else
+            {
+                Intent intent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, IMAGE_REQUEST_CODE);
+                showMusicWhiteBoard();
+            }
         }
         else {
             Toast.makeText(AudioTeachActivity.this,"打开乐谱失败，请确认老师是否接受你的乐谱教学请求...",Toast.LENGTH_SHORT).show();
