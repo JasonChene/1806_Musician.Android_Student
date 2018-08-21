@@ -86,7 +86,7 @@ public class AudioTeachActivity extends AppCompatActivity {
     private static final int IMAGE_REQUEST_CODE = 1001;
     RtcEngine mRtcEngine = null;
     Draw main_draw;
-    ImageView drawBackgroud;
+    View drawBackgroud;
     Draw peer_draw;
     String teacher_name;
     String Channel_name = "";
@@ -342,9 +342,9 @@ public class AudioTeachActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeFile(path);
                         Log.e("bitmap",bitmap.toString());
 //                        ImageView music_draw_white = (ImageView)findViewById(R.id.music_draw_white);
-                        drawBackgroud.setImageBitmap(bitmap);
+//                        drawBackgroud.setImageBitmap(bitmap);
 //                        drawBackgroud.setVisibility(View.VISIBLE);
-//                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
+                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
                         Log.e("bitmap","====================");
 //                        showMusicWhiteBoard();
                     } catch (Exception e) {
