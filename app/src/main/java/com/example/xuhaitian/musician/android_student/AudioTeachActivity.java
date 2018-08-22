@@ -103,20 +103,6 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
         @Override
         public void onUserEnableVideo(int uid, boolean enabled){
-//            Log.e("VIDEO", "........................１"+enabled);
-//            Log.e("VIDEO", "........................１"+uid);
-//            if ( true==enabled ){
-//                Log.e("VIDEO", "........................２");
-//
-//                open_Video();
-//
-//            }
-//            else {
-//                Log.e("VIDEO", "........................３");
-//
-//                close_Video();
-//
-//            }
             final boolean video =enabled;
             runOnUiThread(new Runnable() {
                 @Override

@@ -28,7 +28,6 @@ public class MyLeanCloudApp extends Application {
         options.appKey = "34b421cf05779d2ddcfe1a1ae66035d1";
         NIMClient.init(this, null, options);
 //        WhiteBoardManager.registerRTSIncomingCallObserver(true,this);
-
         AVUser currentUser = AVUser.getCurrentUser();
         if (currentUser != null) {
             Log.e("TAg===",currentUser.getObjectId());
