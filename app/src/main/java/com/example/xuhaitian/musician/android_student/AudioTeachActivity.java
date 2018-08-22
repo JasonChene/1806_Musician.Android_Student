@@ -319,10 +319,14 @@ public class AudioTeachActivity extends AppCompatActivity {
                 drawBackgroud.setVisibility(View.GONE);
                 main_draw.setVisibility(View.GONE);
                 peer_draw.setVisibility(View.GONE);
+                clearMusicPicture();
+                showMusicPicture();
+                TextView textview = (TextView) findViewById(R.id.who_be_teach);
+                textview.setText("正在和"+teacher_name +"语音教学");
             }
         });
     }
-
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -355,13 +359,13 @@ public class AudioTeachActivity extends AppCompatActivity {
                 break;
         }
     }
-
     public void showMusicWhiteBoard(){
         Log.e("show","showMusicWhiteBoard");
         //打开白板
         drawBackgroud.setVisibility(View.VISIBLE);
         main_draw.setVisibility(View.VISIBLE);
         peer_draw.setVisibility(View.VISIBLE);
+        hideMusicPicture();
         List<RTSTunnelType> types = new ArrayList<>(1);
         types.add(RTSTunnelType.DATA);
         String teacherID = "";
@@ -453,12 +457,15 @@ public class AudioTeachActivity extends AppCompatActivity {
         peer_draw.setVisibility(View.VISIBLE);
         drawBackgroud.setVisibility(View.VISIBLE);
 
+
         //注册收到数据的监听
         WhiteBoardManager.registerIncomingData(sessionID, true, main_draw, AudioTeachActivity.this);
 //        WhiteBoardManager.registerRTSCloseObserver(sessionID, true, AudioTeachActivity.this);
         //隐藏本地视频窗口
         FrameLayout local_container = (FrameLayout) findViewById(R.id.local_video_view_container);
         local_container.setVisibility(GONE);
+        TextView textview = (TextView) findViewById(R.id.who_be_teach);
+        textview.setText("正在和"+teacher_name +"乐谱教学");
     }
 
 
@@ -696,21 +703,20 @@ public class AudioTeachActivity extends AppCompatActivity {
                     if (((AVIMTextMessage) message).getText().equals("老师上线"))
                     {
                         Log.e("1", " 老师上线");
-                        textview.setText("正在和"+teacher_name +"乐谱教学");
+                        textview.setText("正在和"+teacher_name +"语音教学");
                         sendMessageToTeacher("成功收到老师上线通知","成功收到老师上线通知");
 
                     }
                     else if(((AVIMTextMessage) message).getText().equals("收到学生上线通知"))
                     {
                         Log.e("2", "收到学生上线通知");
-                        textview.setText("正在和"+teacher_name +"乐谱教学");
+                        textview.setText("正在和"+teacher_name +"语音教学");
 
                     }
                     else if(((AVIMTextMessage) message).getText().equals("老师下线"))
                     {
                         Log.e("3", "老师下线");
                         textview.setText("老师下线");
-
                     }
 
                 }
