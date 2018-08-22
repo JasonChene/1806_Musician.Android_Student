@@ -4,14 +4,18 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -24,10 +28,14 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
@@ -38,17 +46,21 @@ import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage;
-//import com.example.xuhaitian.musician.android_student.CustomView.Draw;
+import com.example.xuhaitian.musician.android_student.CustomView.Draw;
 import com.example.xuhaitian.musician.android_student.common.SysExitUtil;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.rts.RTSManager;
 import com.netease.nimlib.sdk.rts.model.RTSCommonEvent;
 import com.netease.nimlib.sdk.rts.model.RTSTunData;
+import com.netease.nimlib.sdk.rts.constant.RTSTunnelType;
+import com.netease.nimlib.sdk.rts.RTSCallback;
+import com.netease.nimlib.sdk.rts.model.RTSData;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -65,6 +77,7 @@ import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
 
+import static android.app.Activity.RESULT_OK;
 import static android.view.View.GONE;
 
 public class AudioTeachActivity extends AppCompatActivity {
@@ -74,14 +87,16 @@ public class AudioTeachActivity extends AppCompatActivity {
     private static final int PERMISSION_REQ_ID_RECORD_AUDIO = 22;
     private static final int PERMISSION_REQ_ID_CAMERA = PERMISSION_REQ_ID_RECORD_AUDIO + 1;
     private static final String LOG_TAG = "LOG_TAG";
+    private static final int IMAGE_REQUEST_CODE = 1001;
     RtcEngine mRtcEngine = null;
-    //    Draw main_draw;
+    Draw main_draw;
     View drawBackgroud;
-    //    Draw peer_draw;
+    Draw peer_draw;
     String teacher_name;
     String Channel_name = "";
     MyLeanCloudApp myApp;
-    JSONObject mArrStudentInfo;
+    JSONObject mCourseInfo;
+    Boolean isJoinInRoom = false;
     private CustomMessageHandler customMessageHandler;
     private IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
         @Override
@@ -119,21 +134,14 @@ public class AudioTeachActivity extends AppCompatActivity {
 
 
         }
-//        public void onUserMuteVideo(int uid, boolean muted){
-//            Log.e("VIDEO", "........................２");
-//
-//
-//            if (muted== true){
-//                open_Video();
-//                Log.e("VIDEO", "........................２111111111");
-//
-//            }
-//            else {
-//                close_Video();
-//                Log.e("VIDEO", ".......................２.2222222222222");
-//
-//            }
-//        }
+        public void onUserOffline(int uid, int reason)
+        {
+            isJoinInRoom = true;
+        }
+        public void onUserJoined( int uid, int elapsed )
+        {
+            isJoinInRoom = true;
+        }
     };
 //    private Handler handler = new Handler() {
 //        @Override
@@ -250,26 +258,26 @@ public class AudioTeachActivity extends AppCompatActivity {
         initActionBar();
         myApp = (MyLeanCloudApp) getApplication();
         myApp.setAudioTeachActivity(AudioTeachActivity.this);
-//        main_draw = findViewById(R.id.main_draw);
-//        peer_draw = findViewById(R.id.peer_draw);
+        main_draw = findViewById(R.id.main_draw);
+        peer_draw = findViewById(R.id.peer_draw);
         //接受传过来的课程信息
         Intent intent = getIntent();
         String teacher_info = intent.getStringExtra("teacher_info");
         Log.e("teacher_info", "" + teacher_info);
         try {
-            mArrStudentInfo = new JSONObject(teacher_info);
+            mCourseInfo = new JSONObject(teacher_info);
         } catch (JSONException error) {
             Log.e("error", "错误信息" + error);
         }
         try {
-            Channel_name = mArrStudentInfo.getString("student_id");
-            teacher_name = mArrStudentInfo.getString("teacher_name");
+            Channel_name = mCourseInfo.getString("student_id");
+            teacher_name = mCourseInfo.getString("teacher_name");
             Log.e("id", "" + teacher_name);
 
         } catch (JSONException e) {
             Log.e("error", "错误信息" + e);
         }
-//        drawBackgroud = findViewById(R.id.drawBackgroud);
+        drawBackgroud = findViewById(R.id.drawBackgroud);
         if (mRtcEngine == null && checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)) {
 
             initAgoraEngineAndJoinChannel(9999);
@@ -286,15 +294,172 @@ public class AudioTeachActivity extends AppCompatActivity {
             customMessageHandler.setIsOpen(true);
             AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
         }
-        Button back_button = (Button) findViewById(R.id.hands_up_button);
-        back_button.setOnClickListener(new View.OnClickListener() {
+        Button handup_button = (Button) findViewById(R.id.hands_up_button);
+        handup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendMessageToTeacher("HandUp","HandUp");
             }
         });
+
+        Button openMusicBtn = (Button)findViewById(R.id.open_whiteboard_button);
+        openMusicBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMusicWhiteBoard();
+            }
+        });
+
+        Button close_music = (Button)findViewById(R.id.close_music);
+        close_music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WhiteBoardManager.close(main_draw.sessionID,AudioTeachActivity.this);
+                view.setVisibility(View.GONE);
+                drawBackgroud.setVisibility(View.GONE);
+                main_draw.setVisibility(View.GONE);
+                peer_draw.setVisibility(View.GONE);
+            }
+        });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.e(":",requestCode +":"+resultCode+":" +data);
+        //在相册里面选择好相片之后调回到现在的这个activity中
+        switch (requestCode) {
+            case IMAGE_REQUEST_CODE://这里的requestCode是我自己设置的，就是确定返回到那个Activity的标志
+                if (resultCode == RESULT_OK) {//resultcode是setResult里面设置的code值
+                    try {
+                        Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
+                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                        Cursor cursor = getContentResolver().query(selectedImage,
+                                filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
+                        cursor.moveToFirst();
+                        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+
+                        String path = cursor.getString(columnIndex);  //获取照片路径
+                        cursor.close();
+                        Log.e("path",path);
+                        Bitmap bitmap = BitmapFactory.decodeFile(path);
+                        Log.e("bitmap",bitmap.toString());
+                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
+                        uploadMusicImage(path);
+                    } catch (Exception e) {
+                        // TODO Auto-generatedcatch block
+                        e.printStackTrace();
+                    }
+                }
+                break;
+        }
+    }
+
+    public void showMusicWhiteBoard(){
+        Log.e("show","showMusicWhiteBoard");
+        //打开白板
+        drawBackgroud.setVisibility(View.VISIBLE);
+        main_draw.setVisibility(View.VISIBLE);
+        peer_draw.setVisibility(View.VISIBLE);
+        List<RTSTunnelType> types = new ArrayList<>(1);
+        types.add(RTSTunnelType.DATA);
+        String teacherID = "";
+        try {
+            teacherID = mCourseInfo.getString("teacherID");
+        }
+        catch (JSONException e){
+
+        }
+        final String eastAccount = teacherID;
+        String sessionId = RTSManager.getInstance().start(eastAccount, types, null, null, new RTSCallback<RTSData>() {
+            @Override
+            public void onSuccess(RTSData rtsData) {
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
+                //注册主叫方收到被叫相应的回调
+                WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
+                Button close_music = (Button)findViewById(R.id.close_music);
+                close_music.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onFailed(int code) {
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话失败，错误码"+ code, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onException(Throwable exception) {
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void uploadMusicImage(String path){
+        try {
+            final AVFile file = AVFile.withAbsoluteLocalPath("LeanCloud.png", path);
+            file.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(AVException e) {
+                    if (e == null)
+                    {
+                        Log.e("uploadURL", file.getUrl());//返回一个唯一的 Url 地址
+                        String sendImageData = "0:"+file.getUrl();
+                        WhiteBoardManager.sendToRemote(main_draw.sessionID,main_draw.toAccount,sendImageData);
+                    }
+
+                }
+            });
+        }catch (FileNotFoundException err)
+        {
+
+        }
+
+    }
+
+    public void clearMusicPicture()
+    {
+        main_draw.Clear();
+        peer_draw.Clear();
+    }
+
+    public void openMusicWhiteBoard()
+    {
+        Log.e("Tag","打开白板");
+        if (isJoinInRoom == true) {
+
+            if (ActivityCompat.checkSelfPermission(AudioTeachActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(AudioTeachActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            }
+            else
+            {
+                Intent intent = new Intent(
+                        Intent.ACTION_PICK,
+                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, IMAGE_REQUEST_CODE);
+                showMusicWhiteBoard();
+            }
+        }
+        else {
+            Toast.makeText(AudioTeachActivity.this,"打开乐谱失败，请确认老师是否接受你的乐谱教学请求...",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void startKeepUpBoard(String sessionID, String toAccount) {
+        main_draw.sessionID = sessionID;     //参数传递
+        main_draw.toAccount = toAccount;     //参数传递
+        main_draw.setVisibility(View.VISIBLE);
+        peer_draw.sessionID = sessionID;
+        peer_draw.toAccount = toAccount;
+        peer_draw.setVisibility(View.VISIBLE);
+        drawBackgroud.setVisibility(View.VISIBLE);
+
+        //注册收到数据的监听
+        WhiteBoardManager.registerIncomingData(sessionID, true, main_draw, AudioTeachActivity.this);
+//        WhiteBoardManager.registerRTSCloseObserver(sessionID, true, AudioTeachActivity.this);
+        //隐藏本地视频窗口
+        FrameLayout local_container = (FrameLayout) findViewById(R.id.local_video_view_container);
+        local_container.setVisibility(GONE);
+    }
 
 
 
@@ -437,44 +602,44 @@ public class AudioTeachActivity extends AppCompatActivity {
         MusicPicture.setVisibility(View.VISIBLE);
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {//根据请求码判断是哪一次申请的权限
-//            case PERMISSION_REQ_ID_RECORD_AUDIO:
-//                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
-//                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
-//                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
-//                        checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA);
-//                    } else {//用户拒绝授权
-//                        //可以简单提示用户
-//                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                break;
-//            case PERMISSION_REQ_ID_CAMERA:
-//                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
-//                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
-//                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
-//                        initAgoraEngineAndJoinChannel(9998);
-//                        mRtcEngine.disableVideo();
-//                        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
-//                        container.setVisibility(GONE);
-//                        //注册默认的消息处理逻辑
-////                        customMessageHandler = new CustomMessageHandler();
-////                        customMessageHandler.setIsOpen(true);
-////                        AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
-////                        //通知学生老师上线
-////                        sendMessageToStudents("通知学生老师在线","老师上线");
-//                    } else {//用户拒绝授权
-//                        //可以简单提示用户
-//                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                break;
-//            default:
-//                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {//根据请求码判断是哪一次申请的权限
+            case PERMISSION_REQ_ID_RECORD_AUDIO:
+                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
+                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
+                        checkSelfPermission(Manifest.permission.CAMERA, PERMISSION_REQ_ID_CAMERA);
+                    } else {//用户拒绝授权
+                        //可以简单提示用户
+                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            case PERMISSION_REQ_ID_CAMERA:
+                if (grantResults.length > 0) {//grantResults 数组中存放的是授权结果
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {//同意授权
+                        //授权后做一些你想做的事情，即原来不需要动态授权时做的操作
+                        initAgoraEngineAndJoinChannel(9999);
+                        mRtcEngine.disableVideo();
+                        FrameLayout container = (FrameLayout) findViewById(R.id.local_video_view_container);
+                        container.setVisibility(GONE);
+                        //注册默认的消息处理逻辑
+                        customMessageHandler = new CustomMessageHandler();
+                        customMessageHandler.setIsOpen(true);
+                        AVIMMessageManager.registerMessageHandler(AVIMMessage.class, customMessageHandler);
+//                        //通知学生老师上线
+                        sendMessageToTeacher("studentOnline", "studentOnline");
+                    } else {//用户拒绝授权
+                        //可以简单提示用户
+                        Toast.makeText(AudioTeachActivity.this, "没有授权继续操作", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -487,7 +652,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                     this.finish();
                     startActivity(new Intent(AudioTeachActivity.this, MainActivity.class));
                 } else {
-                    Toast.makeText(AudioTeachActivity.this, "现在正在与学生教学", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AudioTeachActivity.this, "现在正在与老师视频", Toast.LENGTH_SHORT).show();
                     return false;
                 }
 //            } else {
@@ -559,7 +724,7 @@ public class AudioTeachActivity extends AppCompatActivity {
     public void sendMessageToTeacher(final String msgName, final String msgtext) {
         try {
             List<String> list = new ArrayList();
-            list.add(mArrStudentInfo.getString("teacherID"));
+            list.add(mCourseInfo.getString("teacherID"));
             myApp.client.createConversation(list, msgName, null,
                     new AVIMConversationCreatedCallback() {
                         @Override

@@ -47,13 +47,7 @@ public class MyLeanCloudApp extends Application {
             });
         }
     }
-    public Boolean getIsRegisterRTSIncomingCallObserver() {
-        return isRegisterRTSIncomingCallObserver;
-    }
 
-    public void setIsRegisterRTSIncomingCallObserver(Boolean RegisterRTSIncomingCallObserver) {
-        this.isRegisterRTSIncomingCallObserver = RegisterRTSIncomingCallObserver;
-    }
     public void setAudioTeachActivity(Context context)
     {
         currentContext = context;
