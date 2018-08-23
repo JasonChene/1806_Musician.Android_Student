@@ -143,7 +143,7 @@ public class AudioTeachActivity extends AppCompatActivity {
             isJoinInRoom = true;
         }
     };
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
