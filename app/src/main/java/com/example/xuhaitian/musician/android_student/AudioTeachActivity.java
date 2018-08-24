@@ -240,11 +240,10 @@ public class AudioTeachActivity extends AppCompatActivity {
 
                         String path = cursor.getString(columnIndex);  //获取照片路径
                         cursor.close();
-                        Log.e("path",path);
                         Bitmap bitmap = BitmapFactory.decodeFile(path);
-                        Log.e("bitmap",bitmap.toString());
                         drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
                         uploadMusicImage(path);
+                        showMusicWhiteBoard();
                     } catch (Exception e) {
                         // TODO Auto-generatedcatch block
                         e.printStackTrace();
@@ -254,7 +253,6 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
     }
     public void showMusicWhiteBoard(){
-        Log.e("show","showMusicWhiteBoard");
         //打开白板
         drawBackgroud.setVisibility(View.VISIBLE);
         main_draw.setVisibility(View.VISIBLE);
@@ -292,7 +290,8 @@ public class AudioTeachActivity extends AppCompatActivity {
         });
     }
 
-    private void uploadMusicImage(String path){
+    private void uploadMusicImage(final String path){
+        Log.e("path",path);
         try {
             final AVFile file = AVFile.withAbsoluteLocalPath("LeanCloud.png", path);
             file.saveInBackground(new SaveCallback() {
@@ -301,7 +300,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                     if (e == null)
                     {
                         Log.e("uploadURL", file.getUrl());//返回一个唯一的 Url 地址
-                        String sendImageData = "0:"+file.getUrl();
+                        String sendImageData = "0:"+file.getUrl()+":"+path;
                         WhiteBoardManager.sendToRemote(main_draw.sessionID,main_draw.toAccount,sendImageData);
                     }
 
@@ -334,7 +333,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, IMAGE_REQUEST_CODE);
-                showMusicWhiteBoard();
+//                showMusicWhiteBoard();
             }
         }
         else {
