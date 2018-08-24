@@ -136,6 +136,18 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
         public void onUserOffline(int uid, int reason)
         {
+            final int status = reason;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    Log.e("REASON", "" + status);
+                    if (status == 0) {
+                        close_Video();
+                    }
+                }
+            });
+
             isJoinInRoom = true;
         }
         public void onUserJoined( int uid, int elapsed )
@@ -220,7 +232,7 @@ public class AudioTeachActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -242,8 +254,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                         cursor.close();
                         Bitmap bitmap = BitmapFactory.decodeFile(path);
                         drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
-                        uploadMusicImage(path);
-                        showMusicWhiteBoard();
+                        showMusicWhiteBoard(path);
                     } catch (Exception e) {
                         // TODO Auto-generatedcatch block
                         e.printStackTrace();
@@ -252,7 +263,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void showMusicWhiteBoard(){
+    public void showMusicWhiteBoard(final String path){
         //打开白板
         drawBackgroud.setVisibility(View.VISIBLE);
         main_draw.setVisibility(View.VISIBLE);
@@ -276,6 +287,7 @@ public class AudioTeachActivity extends AppCompatActivity {
                 WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
                 Button close_music = (Button)findViewById(R.id.close_music);
                 close_music.setVisibility(View.VISIBLE);
+                uploadMusicImage(path);
             }
 
             @Override
