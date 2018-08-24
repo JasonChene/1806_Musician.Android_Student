@@ -136,7 +136,18 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
         public void onUserOffline(int uid, int reason)
         {
-            Log.e("REASON", ""+reason);
+            final int status = reason;
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    Log.e("REASON", "" + status);
+                    if (status == 0) {
+                        close_Video();
+                    }
+                }
+            });
+
             isJoinInRoom = true;
         }
         public void onUserJoined( int uid, int elapsed )

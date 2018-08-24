@@ -11,17 +11,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskJars.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,28 +41,33 @@
       <file leaf-file-name="AudioTeachActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="132" column="15" lean-forward="true" selection-start-line="132" selection-start-column="15" selection-end-line="132" selection-end-column="15" />
+            <state relative-caret-position="520">
+              <caret line="147" column="17" lean-forward="false" selection-start-line="147" selection-start-column="17" selection-end-line="147" selection-end-column="17" />
               <folding>
                 <element signature="e#4210#4479#0" expanded="true" />
                 <element signature="e#4478#4479#0" expanded="true" />
                 <element signature="e#4643#4942#0" expanded="true" />
                 <element signature="e#4941#4942#0" expanded="true" />
-                <element signature="e#7531#7707#0" expanded="true" />
-                <element signature="e#7706#7707#0" expanded="true" />
-                <element signature="e#7832#7990#0" expanded="true" />
-                <element signature="e#7989#7990#0" expanded="true" />
-                <element signature="e#8102#8729#0" expanded="true" />
-                <element signature="e#8728#8729#0" expanded="true" />
-                <element signature="e#12096#12557#0" expanded="true" />
-                <element signature="e#12556#12557#0" expanded="true" />
-                <element signature="e#14890#14922#0" expanded="true" />
-                <element signature="e#16444#17309#0" expanded="true" />
-                <element signature="e#17308#17309#0" expanded="true" />
-                <element signature="e#26026#26942#0" expanded="true" />
-                <element signature="e#26469#26862#0" expanded="true" />
-                <element signature="e#26861#26862#0" expanded="true" />
-                <element signature="e#26941#26942#0" expanded="true" />
+                <element signature="e#5087#5348#0" expanded="true" />
+                <element signature="e#5460#5461#0" expanded="true" />
+                <element signature="e#5503#5504#0" expanded="true" />
+                <element signature="e#7821#7997#0" expanded="true" />
+                <element signature="e#7996#7997#0" expanded="true" />
+                <element signature="e#8122#8280#0" expanded="true" />
+                <element signature="e#8279#8280#0" expanded="true" />
+                <element signature="e#8392#9019#0" expanded="true" />
+                <element signature="e#9018#9019#0" expanded="true" />
+                <element signature="e#12386#12847#0" expanded="true" />
+                <element signature="e#12846#12847#0" expanded="true" />
+                <element signature="e#15180#15212#0" expanded="true" />
+                <element signature="e#16734#17599#0" expanded="true" />
+                <element signature="e#17598#17599#0" expanded="true" />
+                <element signature="e#17947#17948#0" expanded="true" />
+                <element signature="e#17988#17989#0" expanded="true" />
+                <element signature="e#26316#27232#0" expanded="true" />
+                <element signature="e#26759#27152#0" expanded="true" />
+                <element signature="e#27151#27152#0" expanded="true" />
+                <element signature="e#27231#27232#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2327,6 +2326,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2343,7 +2343,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2498615" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Build" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -2369,28 +2369,33 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="132" column="15" lean-forward="true" selection-start-line="132" selection-start-column="15" selection-end-line="132" selection-end-column="15" />
+        <state relative-caret-position="520">
+          <caret line="147" column="17" lean-forward="false" selection-start-line="147" selection-start-column="17" selection-end-line="147" selection-end-column="17" />
           <folding>
             <element signature="e#4210#4479#0" expanded="true" />
             <element signature="e#4478#4479#0" expanded="true" />
             <element signature="e#4643#4942#0" expanded="true" />
             <element signature="e#4941#4942#0" expanded="true" />
-            <element signature="e#7531#7707#0" expanded="true" />
-            <element signature="e#7706#7707#0" expanded="true" />
-            <element signature="e#7832#7990#0" expanded="true" />
-            <element signature="e#7989#7990#0" expanded="true" />
-            <element signature="e#8102#8729#0" expanded="true" />
-            <element signature="e#8728#8729#0" expanded="true" />
-            <element signature="e#12096#12557#0" expanded="true" />
-            <element signature="e#12556#12557#0" expanded="true" />
-            <element signature="e#14890#14922#0" expanded="true" />
-            <element signature="e#16444#17309#0" expanded="true" />
-            <element signature="e#17308#17309#0" expanded="true" />
-            <element signature="e#26026#26942#0" expanded="true" />
-            <element signature="e#26469#26862#0" expanded="true" />
-            <element signature="e#26861#26862#0" expanded="true" />
-            <element signature="e#26941#26942#0" expanded="true" />
+            <element signature="e#5087#5348#0" expanded="true" />
+            <element signature="e#5460#5461#0" expanded="true" />
+            <element signature="e#5503#5504#0" expanded="true" />
+            <element signature="e#7821#7997#0" expanded="true" />
+            <element signature="e#7996#7997#0" expanded="true" />
+            <element signature="e#8122#8280#0" expanded="true" />
+            <element signature="e#8279#8280#0" expanded="true" />
+            <element signature="e#8392#9019#0" expanded="true" />
+            <element signature="e#9018#9019#0" expanded="true" />
+            <element signature="e#12386#12847#0" expanded="true" />
+            <element signature="e#12846#12847#0" expanded="true" />
+            <element signature="e#15180#15212#0" expanded="true" />
+            <element signature="e#16734#17599#0" expanded="true" />
+            <element signature="e#17598#17599#0" expanded="true" />
+            <element signature="e#17947#17948#0" expanded="true" />
+            <element signature="e#17988#17989#0" expanded="true" />
+            <element signature="e#26316#27232#0" expanded="true" />
+            <element signature="e#26759#27152#0" expanded="true" />
+            <element signature="e#27151#27152#0" expanded="true" />
+            <element signature="e#27231#27232#0" expanded="true" />
           </folding>
         </state>
       </provider>
