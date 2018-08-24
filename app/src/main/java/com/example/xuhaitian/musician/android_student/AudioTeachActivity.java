@@ -136,6 +136,7 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
         public void onUserOffline(int uid, int reason)
         {
+            Log.e("REASON", ""+reason);
             isJoinInRoom = true;
         }
         public void onUserJoined( int uid, int elapsed )
@@ -326,7 +327,7 @@ public class AudioTeachActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
