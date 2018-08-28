@@ -98,6 +98,10 @@ public class AudioTeachActivity extends AppCompatActivity {
     JSONObject mCourseInfo;
     Boolean isJoinInRoom = false;
     private CustomMessageHandler customMessageHandler;
+
+    List<String> mPeerDataList = new ArrayList<String>();
+    List<String> mDrawDataList = new ArrayList<String>();
+    public String mImagePath = "";
     private IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
         @Override
         public void onJoinChannelSuccess(String channel, int uid, int elapsed) {
@@ -155,6 +159,14 @@ public class AudioTeachActivity extends AppCompatActivity {
             isJoinInRoom = true;
         }
     };
+    public void addPeerData(String data)
+    {
+        mPeerDataList.add(data);
+    }
+    public void addDrawData(String data)
+    {
+        mDrawDataList.add(data);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +178,10 @@ public class AudioTeachActivity extends AppCompatActivity {
         myApp.setAudioTeachActivity(AudioTeachActivity.this);
         main_draw = findViewById(R.id.main_draw);
         peer_draw = findViewById(R.id.peer_draw);
+
+        main_draw.setContext(AudioTeachActivity.this);
+        peer_draw.setContext(AudioTeachActivity.this);
+
         //接受传过来的课程信息
         Intent intent = getIntent();
         String teacher_info = intent.getStringExtra("teacher_info");
@@ -205,6 +221,8 @@ public class AudioTeachActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendMessageToTeacher("HandUp","HandUp");
+                Toast.makeText(AudioTeachActivity.this, "举手成功", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -220,18 +238,31 @@ public class AudioTeachActivity extends AppCompatActivity {
         close_music.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                closeMusicTeach();
+            }
+        });
+    }
+    public void closeMusicTeach()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
                 WhiteBoardManager.close(main_draw.sessionID,AudioTeachActivity.this);
-                view.setVisibility(View.GONE);
+                Button close_music = (Button)findViewById(R.id.close_music);
+                close_music.setVisibility(GONE);
                 drawBackgroud.setVisibility(View.GONE);
                 main_draw.setVisibility(View.GONE);
                 peer_draw.setVisibility(View.GONE);
-                clearMusicPicture();
+//                clearMusicPicture();
+                main_draw.Clear();
+                peer_draw.Clear();
                 showMusicPicture();
                 TextView textview = (TextView) findViewById(R.id.who_be_teach);
                 textview.setText("正在和"+teacher_name +"语音教学");
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -249,11 +280,8 @@ public class AudioTeachActivity extends AppCompatActivity {
                                 filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
                         cursor.moveToFirst();
                         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-
                         String path = cursor.getString(columnIndex);  //获取照片路径
                         cursor.close();
-                        Bitmap bitmap = BitmapFactory.decodeFile(path);
-                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
                         showMusicWhiteBoard(path);
                     } catch (Exception e) {
                         // TODO Auto-generatedcatch block
@@ -264,11 +292,6 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
     }
     public void showMusicWhiteBoard(final String path){
-        //打开白板
-        drawBackgroud.setVisibility(View.VISIBLE);
-        main_draw.setVisibility(View.VISIBLE);
-        peer_draw.setVisibility(View.VISIBLE);
-        hideMusicPicture();
         List<RTSTunnelType> types = new ArrayList<>(1);
         types.add(RTSTunnelType.DATA);
         String teacherID = "";
@@ -282,7 +305,7 @@ public class AudioTeachActivity extends AppCompatActivity {
         String sessionId = RTSManager.getInstance().start(eastAccount, types, null, null, new RTSCallback<RTSData>() {
             @Override
             public void onSuccess(RTSData rtsData) {
-                Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AudioTeachActivity.this, "发起白板会话成功", Toast.LENGTH_SHORT).show();
                 //注册主叫方收到被叫相应的回调
                 WhiteBoardManager.registerCalleeAckNotification(rtsData.getLocalSessionId(),true,eastAccount,AudioTeachActivity.this);
                 Button close_music = (Button)findViewById(R.id.close_music);
@@ -292,18 +315,17 @@ public class AudioTeachActivity extends AppCompatActivity {
 
             @Override
             public void onFailed(int code) {
-                Toast.makeText(AudioTeachActivity.this, "发起白板会话失败，错误码"+ code, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AudioTeachActivity.this, "发起白板会话失败", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onException(Throwable exception) {
-                Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AudioTeachActivity.this, "发起白板会话异常", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void uploadMusicImage(final String path){
-        Log.e("path",path);
         try {
             final AVFile file = AVFile.withAbsoluteLocalPath("LeanCloud.png", path);
             file.saveInBackground(new SaveCallback() {
@@ -311,9 +333,33 @@ public class AudioTeachActivity extends AppCompatActivity {
                 public void done(AVException e) {
                     if (e == null)
                     {
-                        Log.e("uploadURL", file.getUrl());//返回一个唯一的 Url 地址
+
                         String sendImageData = "0:"+file.getUrl()+":"+path;
                         WhiteBoardManager.sendToRemote(main_draw.sessionID,main_draw.toAccount,sendImageData);
+                        Log.e("uploadURL", sendImageData);//返回一个唯一的 Url 地址
+                        Bitmap bitmap = BitmapFactory.decodeFile(path);
+                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
+                        //打开白板
+                        drawBackgroud.setVisibility(View.VISIBLE);
+                        main_draw.setVisibility(View.VISIBLE);
+                        peer_draw.setVisibility(View.VISIBLE);
+                        hideMusicPicture();
+
+                        if (mImagePath.equals(path))
+                        {
+                            for (int m = 0; m < mDrawDataList.size(); m ++)
+                            {
+                                main_draw.dataPaint(mDrawDataList.get(m));
+                            }
+                            for (int n = 0; n < mPeerDataList.size(); n ++)
+                            {
+                                peer_draw.dataPaint(mPeerDataList.get(n));
+                            }
+                        }else {
+                            mImagePath = path;
+                            mDrawDataList.clear();
+                            mPeerDataList.clear();
+                        }
                     }
 
                 }
@@ -329,6 +375,8 @@ public class AudioTeachActivity extends AppCompatActivity {
     {
         main_draw.Clear();
         peer_draw.Clear();
+        mDrawDataList.clear();
+        mPeerDataList.clear();
     }
 
     public void openMusicWhiteBoard()
@@ -345,7 +393,6 @@ public class AudioTeachActivity extends AppCompatActivity {
                         Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, IMAGE_REQUEST_CODE);
-//                showMusicWhiteBoard();
             }
         }
         else {

@@ -46,7 +46,6 @@ public class WhiteBoardManager {
                         return;
                     }
                     // 进入会话界面
-                    Toast.makeText(context, "接听成功", Toast.LENGTH_SHORT).show();
                     AudioTeachActivity activity = (AudioTeachActivity)context;
                     activity.startKeepUpBoard(sessionId,toAccount);
 
@@ -148,6 +147,12 @@ public class WhiteBoardManager {
                             audioTeachActivity.clearMusicPicture();
                             return;
                         }
+                        if (data.equals("close"))
+                        {
+                            AudioTeachActivity audioTeachActivity = (AudioTeachActivity)context;
+                            audioTeachActivity.closeMusicTeach();
+                            return;
+                        }
                         if (Integer.valueOf(data.substring(0,1)) == 1)
                         {
                             tag = "m";
@@ -165,6 +170,8 @@ public class WhiteBoardManager {
                         String newData = time +"," + x +"," + y + tag;
                         if (draw != null)
                         {
+                            AudioTeachActivity audioTeachActivity = (AudioTeachActivity)context;
+                            audioTeachActivity.addPeerData(newData);
                             draw.dataPaint(newData);
                             Log.d("收到数据", "================onEvent: "+newData);
                         }
@@ -201,6 +208,7 @@ public class WhiteBoardManager {
      */
     public static void sendToRemote(String sessionId, String toAccount, String data) {
         if (data == null || data.isEmpty()) {
+            Log.e("tag","发送数据为空");
             return;
         }
         try {

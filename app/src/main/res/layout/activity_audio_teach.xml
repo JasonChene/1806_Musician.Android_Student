@@ -59,27 +59,28 @@
 
         <Button
             android:id="@+id/open_whiteboard_button"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="7dp"
             android:background="@drawable/btn_shape"
             android:orientation="horizontal"
             android:text="打开乐谱"
             android:radius="10dp"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             app:layout_constraintTop_toTopOf="parent" />
         <Button
             android:id="@+id/hands_up_button"
-            android:layout_width="100dp"
-            android:layout_height="30dp"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom"
             android:layout_marginBottom="7dp"
             android:background="@drawable/btn_shape"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal"
+            android:textColor="@android:color/white"
             android:text="举手"
             android:radius="10dp"
-            android:textColor="#FFFFFF"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
@@ -110,10 +111,11 @@
 
         <Button
             android:id="@+id/close_music"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
             android:text="关闭乐谱"
             android:layout_gravity="bottom"
+            android:textColor="@android:color/white"
             android:layout_marginBottom="7dp"
             android:background="@drawable/btn_shape"
          android:visibility="invisible"/>

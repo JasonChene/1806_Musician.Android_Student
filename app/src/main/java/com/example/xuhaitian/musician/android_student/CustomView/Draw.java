@@ -16,6 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import com.example.xuhaitian.musician.android_student.AudioTeachActivity;
 import com.example.xuhaitian.musician.android_student.WhiteBoardManager;
 import com.example.xuhaitian.musician.android_student.manager.DataItem;
 import com.example.xuhaitian.musician.android_student.manager.DataManager;
@@ -40,6 +41,7 @@ public class Draw extends SurfaceView implements SurfaceHolder.Callback,View.OnT
     private String dataProcessed;
     int refPacketID;
     Bitmap canvasBitmap = null;
+    public Context mContext = null;
 
 
     Paint paint = new Paint();
@@ -53,6 +55,12 @@ public class Draw extends SurfaceView implements SurfaceHolder.Callback,View.OnT
     }
     public Draw(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public void setContext(Context context)
+    {
+        mContext = context;
+        Log.e("context",context.toString());
     }
 
     public Draw(Context context, AttributeSet attrs) {
@@ -104,6 +112,9 @@ public class Draw extends SurfaceView implements SurfaceHolder.Callback,View.OnT
     public boolean onTouch(View v, MotionEvent event) {
         int height=getMeasuredHeight();
         int width=getMeasuredWidth();
+        String time = String.format("%010d", System.currentTimeMillis()/1000);
+        String strData = "";
+        AudioTeachActivity audioTeachActivity = (AudioTeachActivity)mContext;
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
 
@@ -113,6 +124,8 @@ public class Draw extends SurfaceView implements SurfaceHolder.Callback,View.OnT
                 timeStamp = getTime();  //获取时间戳
                 dataProcessed = "1"+":"+x/width+","+y/height+";" + "5:" + (refPacketID++) + ",0";  //数据打包
                 draw();
+                strData = time +"," + x +"," + y + "m";
+                audioTeachActivity.addDrawData(strData);
                 WhiteBoardManager.sendToRemote(sessionID,toAccount,dataProcessed); //发送封装好的数据
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -122,6 +135,8 @@ public class Draw extends SurfaceView implements SurfaceHolder.Callback,View.OnT
                 timeStamp = getTime();  //获取时间戳
                 dataProcessed = "2"+":"+x/width+","+y/height+";" + "5:" + (refPacketID++) + ",0";  //数据打包
                 draw();
+                strData = time +"," + x +"," + y + "l";
+                audioTeachActivity.addDrawData(strData);
                 WhiteBoardManager.sendToRemote(sessionID,toAccount,dataProcessed); //发送封装好的数据
                 break;
         }
