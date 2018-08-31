@@ -25,12 +25,14 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,6 +103,8 @@ public class AudioTeachActivity extends AppCompatActivity {
     JSONObject mCourseInfo;
     Boolean isJoinInRoom = false;
     private CustomMessageHandler customMessageHandler;
+    RelativeLayout wholeView;
+    TextView teacher_pause;
 
     List<String> mPeerDataList = new ArrayList<String>();
     List<String> mDrawDataList = new ArrayList<String>();
@@ -176,6 +180,20 @@ public class AudioTeachActivity extends AppCompatActivity {
         setContentView(R.layout.activity_audio_teach);
         SysExitUtil.activityList.add(AudioTeachActivity.this);
         initActionBar();
+        wholeView = (RelativeLayout)findViewById(R.id.wholeView);
+        wholeView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                wholeView.setBackgroundColor(Color.WHITE);
+                teacher_pause.setVisibility(GONE);
+                return true;
+            }
+        });
+        teacher_pause = (TextView)findViewById(R.id.teacher_pause);
+        teacher_pause.setVisibility(GONE);
+
+
+        wholeView.setBackgroundColor(Color.WHITE);
         myApp = (MyLeanCloudApp) getApplication();
         myApp.setAudioTeachActivity(AudioTeachActivity.this);
         main_draw = findViewById(R.id.main_draw);
@@ -678,8 +696,11 @@ public class AudioTeachActivity extends AppCompatActivity {
                     }
                     else if(((AVIMTextMessage) message).getText().equals("老师下线"))
                     {
-                        Log.e("3", "老师下线");
                         textview.setText("老师下线");
+                    }
+                    else if (((AVIMTextMessage) message).getText().equals("pausePlaying")){
+                        wholeView.setBackgroundColor(Color.rgb(223,137,49));
+                        teacher_pause.setVisibility(View.VISIBLE);
                     }
 
                 }

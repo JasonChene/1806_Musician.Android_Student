@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:id="@+id/wholeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,6 +17,18 @@
             android:textColor="#101010"
             android:text="老师未上线"
             android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/teacher_pause"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="5dp"
+            android:textColor="#101010"
+            android:text="老师正在要求暂停"
+            android:textSize="14dp"
+            android:visibility="gone"/>
+
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"

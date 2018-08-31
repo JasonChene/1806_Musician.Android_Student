@@ -19,43 +19,9 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_livedata_core_1_1_1.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_runtime_1_1_1.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_lifecycle_viewmodel_1_1_1.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__cn_leancloud_android_avoscloud_push_v4_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__cn_leancloud_android_avoscloud_push_v4_7_0.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_animated_vector_drawable_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_appcompat_v7_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_constraint_constraint_layout_1_1_2.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_coordinatorlayout_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cursoradapter_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customview_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_documentfile_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_drawerlayout_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_interpolator_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_loader_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_localbroadcastmanager_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_print_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_slidingpanelayout_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_compat_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_ui_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_core_utils_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_fragment_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_27_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_media_compat_27_1_0.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_27_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_27_1_0.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_vector_drawable_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_swiperefreshlayout_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_core_3_0_2.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_espresso_espresso_idling_resource_3_0_2.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_monitor_1_0_2.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_test_runner_1_0_2.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_versionedparcelable_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_alpha3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_viewpager_28_0_0_alpha3.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jacktuotuo_customview_verificationcodeview_1_0_3.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jacktuotuo_customview_verificationcodeview_1_0_3.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -71,43 +37,45 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AudioTeachActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AudioTeachActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="341" column="62" lean-forward="false" selection-start-line="341" selection-start-column="62" selection-end-line="341" selection-end-column="62" />
+            <state relative-caret-position="268">
+              <caret line="702" column="64" lean-forward="false" selection-start-line="702" selection-start-column="64" selection-end-line="702" selection-end-column="64" />
               <folding>
-                <element signature="e#3867#3875#0" expanded="true" />
-                <element signature="e#3925#3933#0" expanded="true" />
-                <element signature="e#4466#4735#0" expanded="true" />
-                <element signature="e#4734#4735#0" expanded="true" />
-                <element signature="e#4899#5198#0" expanded="true" />
-                <element signature="e#5197#5198#0" expanded="true" />
-                <element signature="e#5343#5603#0" expanded="true" />
-                <element signature="e#5602#5603#0" expanded="true" />
-                <element signature="e#8360#8629#0" expanded="true" />
-                <element signature="e#8628#8629#0" expanded="true" />
-                <element signature="e#8754#8912#0" expanded="true" />
-                <element signature="e#8911#8912#0" expanded="true" />
-                <element signature="e#9024#9178#0" expanded="true" />
-                <element signature="e#9177#9178#0" expanded="true" />
-                <element signature="e#9249#10002#0" expanded="true" />
-                <element signature="e#10001#10002#0" expanded="true" />
-                <element signature="e#13010#15144#0" expanded="true" />
-                <element signature="e#13373#15117#0" expanded="true" />
-                <element signature="e#15116#15117#0" expanded="true" />
-                <element signature="e#15143#15144#0" expanded="true" />
-                <element signature="e#17442#17474#0" expanded="true" />
-                <element signature="e#18996#19861#0" expanded="true" />
-                <element signature="e#19860#19861#0" expanded="true" />
-                <element signature="e#20209#20210#0" expanded="true" />
-                <element signature="e#20250#20251#0" expanded="true" />
-                <element signature="e#28578#29494#0" expanded="true" />
-                <element signature="e#29021#29414#0" expanded="true" />
-                <element signature="e#29413#29414#0" expanded="true" />
-                <element signature="e#29493#29494#0" expanded="true" />
-                <element signature="e#31395#31396#0" expanded="true" />
-                <element signature="e#31439#31440#0" expanded="true" />
+                <element signature="e#3996#4004#0" expanded="true" />
+                <element signature="e#4054#4062#0" expanded="true" />
+                <element signature="e#4595#4864#0" expanded="true" />
+                <element signature="e#4863#4864#0" expanded="true" />
+                <element signature="e#5028#5327#0" expanded="true" />
+                <element signature="e#5326#5327#0" expanded="true" />
+                <element signature="e#5472#5732#0" expanded="true" />
+                <element signature="e#5731#5732#0" expanded="true" />
+                <element signature="e#6430#6716#0" expanded="true" />
+                <element signature="e#6715#6716#0" expanded="true" />
+                <element signature="e#9045#9314#0" expanded="true" />
+                <element signature="e#9313#9314#0" expanded="true" />
+                <element signature="e#9439#9597#0" expanded="true" />
+                <element signature="e#9596#9597#0" expanded="true" />
+                <element signature="e#9709#9863#0" expanded="true" />
+                <element signature="e#9862#9863#0" expanded="true" />
+                <element signature="e#9934#10687#0" expanded="true" />
+                <element signature="e#10686#10687#0" expanded="true" />
+                <element signature="e#13695#15829#0" expanded="true" />
+                <element signature="e#14058#15802#0" expanded="true" />
+                <element signature="e#15801#15802#0" expanded="true" />
+                <element signature="e#15828#15829#0" expanded="true" />
+                <element signature="e#18127#18159#0" expanded="true" />
+                <element signature="e#19681#20546#0" expanded="true" />
+                <element signature="e#20545#20546#0" expanded="true" />
+                <element signature="e#20894#20895#0" expanded="true" />
+                <element signature="e#20935#20936#0" expanded="true" />
+                <element signature="e#29477#30393#0" expanded="true" />
+                <element signature="e#29920#30313#0" expanded="true" />
+                <element signature="e#30312#30313#0" expanded="true" />
+                <element signature="e#30392#30393#0" expanded="true" />
+                <element signature="e#32294#32295#0" expanded="true" />
+                <element signature="e#32338#32339#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_audio_teach.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="activity_audio_teach.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="60" column="51" lean-forward="false" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="51" />
+            <state relative-caret-position="405">
+              <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -144,6 +112,9 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>compressImage</find>
+      <find>handup</find>
+      <find>老师上线</find>
+      <find>正在和</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2181,6 +2152,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
       </list>
     </option>
@@ -2470,55 +2442,57 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="702" column="64" lean-forward="false" selection-start-line="702" selection-start-column="64" selection-end-line="702" selection-end-column="64" />
+          <folding>
+            <element signature="e#3996#4004#0" expanded="true" />
+            <element signature="e#4054#4062#0" expanded="true" />
+            <element signature="e#4595#4864#0" expanded="true" />
+            <element signature="e#4863#4864#0" expanded="true" />
+            <element signature="e#5028#5327#0" expanded="true" />
+            <element signature="e#5326#5327#0" expanded="true" />
+            <element signature="e#5472#5732#0" expanded="true" />
+            <element signature="e#5731#5732#0" expanded="true" />
+            <element signature="e#6430#6716#0" expanded="true" />
+            <element signature="e#6715#6716#0" expanded="true" />
+            <element signature="e#9045#9314#0" expanded="true" />
+            <element signature="e#9313#9314#0" expanded="true" />
+            <element signature="e#9439#9597#0" expanded="true" />
+            <element signature="e#9596#9597#0" expanded="true" />
+            <element signature="e#9709#9863#0" expanded="true" />
+            <element signature="e#9862#9863#0" expanded="true" />
+            <element signature="e#9934#10687#0" expanded="true" />
+            <element signature="e#10686#10687#0" expanded="true" />
+            <element signature="e#13695#15829#0" expanded="true" />
+            <element signature="e#14058#15802#0" expanded="true" />
+            <element signature="e#15801#15802#0" expanded="true" />
+            <element signature="e#15828#15829#0" expanded="true" />
+            <element signature="e#18127#18159#0" expanded="true" />
+            <element signature="e#19681#20546#0" expanded="true" />
+            <element signature="e#20545#20546#0" expanded="true" />
+            <element signature="e#20894#20895#0" expanded="true" />
+            <element signature="e#20935#20936#0" expanded="true" />
+            <element signature="e#29477#30393#0" expanded="true" />
+            <element signature="e#29920#30313#0" expanded="true" />
+            <element signature="e#30312#30313#0" expanded="true" />
+            <element signature="e#30392#30393#0" expanded="true" />
+            <element signature="e#32294#32295#0" expanded="true" />
+            <element signature="e#32338#32339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="60" column="51" lean-forward="false" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="51" />
+        <state relative-caret-position="405">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="34" />
           <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer2">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="341" column="62" lean-forward="false" selection-start-line="341" selection-start-column="62" selection-end-line="341" selection-end-column="62" />
-          <folding>
-            <element signature="e#3867#3875#0" expanded="true" />
-            <element signature="e#3925#3933#0" expanded="true" />
-            <element signature="e#4466#4735#0" expanded="true" />
-            <element signature="e#4734#4735#0" expanded="true" />
-            <element signature="e#4899#5198#0" expanded="true" />
-            <element signature="e#5197#5198#0" expanded="true" />
-            <element signature="e#5343#5603#0" expanded="true" />
-            <element signature="e#5602#5603#0" expanded="true" />
-            <element signature="e#8360#8629#0" expanded="true" />
-            <element signature="e#8628#8629#0" expanded="true" />
-            <element signature="e#8754#8912#0" expanded="true" />
-            <element signature="e#8911#8912#0" expanded="true" />
-            <element signature="e#9024#9178#0" expanded="true" />
-            <element signature="e#9177#9178#0" expanded="true" />
-            <element signature="e#9249#10002#0" expanded="true" />
-            <element signature="e#10001#10002#0" expanded="true" />
-            <element signature="e#13010#15144#0" expanded="true" />
-            <element signature="e#13373#15117#0" expanded="true" />
-            <element signature="e#15116#15117#0" expanded="true" />
-            <element signature="e#15143#15144#0" expanded="true" />
-            <element signature="e#17442#17474#0" expanded="true" />
-            <element signature="e#18996#19861#0" expanded="true" />
-            <element signature="e#19860#19861#0" expanded="true" />
-            <element signature="e#20209#20210#0" expanded="true" />
-            <element signature="e#20250#20251#0" expanded="true" />
-            <element signature="e#28578#29494#0" expanded="true" />
-            <element signature="e#29021#29414#0" expanded="true" />
-            <element signature="e#29413#29414#0" expanded="true" />
-            <element signature="e#29493#29494#0" expanded="true" />
-            <element signature="e#31395#31396#0" expanded="true" />
-            <element signature="e#31439#31440#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
   </component>
