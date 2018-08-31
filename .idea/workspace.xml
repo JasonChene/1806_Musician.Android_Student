@@ -15,9 +15,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,13 +39,42 @@
       <file leaf-file-name="AudioTeachActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="563" column="51" lean-forward="false" selection-start-line="563" selection-start-column="51" selection-end-line="563" selection-end-column="51" />
+            <state relative-caret-position="376">
+              <caret line="279" column="34" lean-forward="true" selection-start-line="279" selection-start-column="34" selection-end-line="279" selection-end-column="34" />
               <folding>
-                <element signature="e#20894#20895#0" expanded="true" />
-                <element signature="e#20935#20936#0" expanded="true" />
-                <element signature="e#32831#32832#0" expanded="true" />
-                <element signature="e#32875#32876#0" expanded="true" />
+                <element signature="e#4085#4093#0" expanded="true" />
+                <element signature="e#4143#4151#0" expanded="true" />
+                <element signature="e#4684#4953#0" expanded="true" />
+                <element signature="e#4952#4953#0" expanded="true" />
+                <element signature="e#5117#5416#0" expanded="true" />
+                <element signature="e#5415#5416#0" expanded="true" />
+                <element signature="e#5561#5821#0" expanded="true" />
+                <element signature="e#5820#5821#0" expanded="true" />
+                <element signature="e#6519#6805#0" expanded="true" />
+                <element signature="e#6804#6805#0" expanded="true" />
+                <element signature="e#9134#9403#0" expanded="true" />
+                <element signature="e#9402#9403#0" expanded="true" />
+                <element signature="e#9528#9686#0" expanded="true" />
+                <element signature="e#9685#9686#0" expanded="true" />
+                <element signature="e#9798#9952#0" expanded="true" />
+                <element signature="e#9951#9952#0" expanded="true" />
+                <element signature="e#10023#10793#0" expanded="true" />
+                <element signature="e#10792#10793#0" expanded="true" />
+                <element signature="e#15133#17309#0" expanded="true" />
+                <element signature="e#15538#17282#0" expanded="true" />
+                <element signature="e#17281#17282#0" expanded="true" />
+                <element signature="e#17308#17309#0" expanded="true" />
+                <element signature="e#19607#19639#0" expanded="true" />
+                <element signature="e#21161#22026#0" expanded="true" />
+                <element signature="e#22025#22026#0" expanded="true" />
+                <element signature="e#22374#22375#0" expanded="true" />
+                <element signature="e#22415#22416#0" expanded="true" />
+                <element signature="e#31494#32410#0" expanded="true" />
+                <element signature="e#31937#32330#0" expanded="true" />
+                <element signature="e#32329#32330#0" expanded="true" />
+                <element signature="e#32409#32410#0" expanded="true" />
+                <element signature="e#34311#34312#0" expanded="true" />
+                <element signature="e#34355#34356#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -65,8 +96,8 @@
       <file leaf-file-name="activity_audio_teach.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="73" column="51" lean-forward="false" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="51" />
+            <state relative-caret-position="334">
+              <caret line="125" column="24" lean-forward="false" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -84,6 +115,7 @@
       <find>老师上线</find>
       <find>正在和</find>
       <find>open_Video</find>
+      <find>close_m</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2413,8 +2445,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_audio_teach.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="73" column="51" lean-forward="false" selection-start-line="73" selection-start-column="29" selection-end-line="73" selection-end-column="51" />
+        <state relative-caret-position="334">
+          <caret line="125" column="24" lean-forward="false" selection-start-line="125" selection-start-column="24" selection-end-line="125" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -2424,13 +2456,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/xuhaitian/musician/android_student/AudioTeachActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="563" column="51" lean-forward="false" selection-start-line="563" selection-start-column="51" selection-end-line="563" selection-end-column="51" />
+        <state relative-caret-position="376">
+          <caret line="279" column="34" lean-forward="true" selection-start-line="279" selection-start-column="34" selection-end-line="279" selection-end-column="34" />
           <folding>
-            <element signature="e#20894#20895#0" expanded="true" />
-            <element signature="e#20935#20936#0" expanded="true" />
-            <element signature="e#32831#32832#0" expanded="true" />
-            <element signature="e#32875#32876#0" expanded="true" />
+            <element signature="e#4085#4093#0" expanded="true" />
+            <element signature="e#4143#4151#0" expanded="true" />
+            <element signature="e#4684#4953#0" expanded="true" />
+            <element signature="e#4952#4953#0" expanded="true" />
+            <element signature="e#5117#5416#0" expanded="true" />
+            <element signature="e#5415#5416#0" expanded="true" />
+            <element signature="e#5561#5821#0" expanded="true" />
+            <element signature="e#5820#5821#0" expanded="true" />
+            <element signature="e#6519#6805#0" expanded="true" />
+            <element signature="e#6804#6805#0" expanded="true" />
+            <element signature="e#9134#9403#0" expanded="true" />
+            <element signature="e#9402#9403#0" expanded="true" />
+            <element signature="e#9528#9686#0" expanded="true" />
+            <element signature="e#9685#9686#0" expanded="true" />
+            <element signature="e#9798#9952#0" expanded="true" />
+            <element signature="e#9951#9952#0" expanded="true" />
+            <element signature="e#10023#10793#0" expanded="true" />
+            <element signature="e#10792#10793#0" expanded="true" />
+            <element signature="e#15133#17309#0" expanded="true" />
+            <element signature="e#15538#17282#0" expanded="true" />
+            <element signature="e#17281#17282#0" expanded="true" />
+            <element signature="e#17308#17309#0" expanded="true" />
+            <element signature="e#19607#19639#0" expanded="true" />
+            <element signature="e#21161#22026#0" expanded="true" />
+            <element signature="e#22025#22026#0" expanded="true" />
+            <element signature="e#22374#22375#0" expanded="true" />
+            <element signature="e#22415#22416#0" expanded="true" />
+            <element signature="e#31494#32410#0" expanded="true" />
+            <element signature="e#31937#32330#0" expanded="true" />
+            <element signature="e#32329#32330#0" expanded="true" />
+            <element signature="e#32409#32410#0" expanded="true" />
+            <element signature="e#34311#34312#0" expanded="true" />
+            <element signature="e#34355#34356#0" expanded="true" />
           </folding>
         </state>
       </provider>
