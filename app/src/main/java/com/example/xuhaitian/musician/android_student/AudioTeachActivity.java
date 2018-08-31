@@ -558,6 +558,10 @@ public class AudioTeachActivity extends AppCompatActivity {
             container_local.setVisibility(View.GONE);
             FrameLayout container_remote = (FrameLayout) findViewById(R.id.remote_video_view_container);
             container_remote.setVisibility(View.GONE);
+            Button handup_button = (Button) findViewById(R.id.hands_up_button);
+            handup_button.setVisibility(View.VISIBLE);
+            Button openMusicBtn = (Button)findViewById(R.id.open_whiteboard_button);
+            openMusicBtn.setVisibility(View.VISIBLE);
         }
     }
     private void open_Video() {
@@ -568,6 +572,10 @@ public class AudioTeachActivity extends AppCompatActivity {
             container_local.setVisibility(View.VISIBLE);
             FrameLayout container_remote = (FrameLayout) findViewById(R.id.remote_video_view_container);
             container_remote.setVisibility(View.VISIBLE);
+            Button handup_button = (Button) findViewById(R.id.hands_up_button);
+            handup_button.setVisibility(View.GONE);
+            Button openMusicBtn = (Button)findViewById(R.id.open_whiteboard_button);
+            openMusicBtn.setVisibility(GONE);
         }
     }
     private void setupLocalVideo(int uid) {
