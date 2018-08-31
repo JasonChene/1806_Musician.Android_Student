@@ -12,6 +12,7 @@ import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -60,6 +61,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -144,7 +147,6 @@ public class AudioTeachActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-
                     Log.e("REASON", "" + status);
                     if (status == 0) {
                         close_Video();
@@ -325,50 +327,59 @@ public class AudioTeachActivity extends AppCompatActivity {
         });
     }
 
+    public byte[] Bitmap2Bytes(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
     private void uploadMusicImage(final String path){
-        try {
-            final AVFile file = AVFile.withAbsoluteLocalPath("LeanCloud.png", path);
-            file.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(AVException e) {
-                    if (e == null)
-                    {
 
-                        String sendImageData = "0:"+file.getUrl()+":"+path;
-                        WhiteBoardManager.sendToRemote(main_draw.sessionID,main_draw.toAccount,sendImageData);
-                        Log.e("uploadURL", sendImageData);//返回一个唯一的 Url 地址
-                        Bitmap bitmap = BitmapFactory.decodeFile(path);
-                        drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
-                        //打开白板
-                        drawBackgroud.setVisibility(View.VISIBLE);
-                        main_draw.setVisibility(View.VISIBLE);
-                        peer_draw.setVisibility(View.VISIBLE);
-                        hideMusicPicture();
-
-                        if (mImagePath.equals(path))
+        new Thread() {
+            @Override
+            public void run() {
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                byte[] imageBytes = compressImage(bitmap,500);
+                Log.e("count",imageBytes.length+"");
+                final AVFile file = new AVFile("LeanCloud.png",imageBytes);
+                file.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(AVException e) {
+                        if (e == null)
                         {
-                            for (int m = 0; m < mDrawDataList.size(); m ++)
+                            String sendImageData = "0:"+file.getUrl()+":"+path;
+                            WhiteBoardManager.sendToRemote(main_draw.sessionID,main_draw.toAccount,sendImageData);
+                            Log.e("uploadURL", sendImageData);//返回一个唯一的 Url 地址
+                            Bitmap bitmap = BitmapFactory.decodeFile(path);
+                            drawBackgroud.setBackground(new BitmapDrawable(getResources(), bitmap));
+                            //打开白板
+                            drawBackgroud.setVisibility(View.VISIBLE);
+                            main_draw.setVisibility(View.VISIBLE);
+                            peer_draw.setVisibility(View.VISIBLE);
+                            hideMusicPicture();
+
+                            if (mImagePath.equals(path))
                             {
-                                main_draw.dataPaint(mDrawDataList.get(m));
+                                for (int m = 0; m < mDrawDataList.size(); m ++)
+                                {
+                                    main_draw.dataPaint(mDrawDataList.get(m));
+                                }
+                                for (int n = 0; n < mPeerDataList.size(); n ++)
+                                {
+                                    peer_draw.dataPaint(mPeerDataList.get(n));
+                                }
+                            }else {
+                                mImagePath = path;
+                                mDrawDataList.clear();
+                                mPeerDataList.clear();
                             }
-                            for (int n = 0; n < mPeerDataList.size(); n ++)
-                            {
-                                peer_draw.dataPaint(mPeerDataList.get(n));
-                            }
-                        }else {
-                            mImagePath = path;
-                            mDrawDataList.clear();
-                            mPeerDataList.clear();
                         }
+
                     }
+                });
 
-                }
-            });
-        }catch (FileNotFoundException err)
-        {
-
-        }
-
+            }
+        }.start();
     }
 
     public void clearMusicPicture()
@@ -706,4 +717,55 @@ public class AudioTeachActivity extends AppCompatActivity {
 
         }
     }
+
+    public static byte[] compressImage(Bitmap image, int maxSize) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);// 质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > maxSize) { // 循环判断如果压缩后图片是否大于100kb,大于继续压缩
+            options = options/2;
+            baos.reset(); // 重置baos即清空baos
+            image.compress(Bitmap.CompressFormat.JPEG, options, baos);// 这里压缩options%，把压缩后的数据存放到baos中
+//            Log.e("compressImage","while"+options);
+        }
+        return baos.toByteArray();
+    }
+
+
+    public class UpdateAsyncTask extends AsyncTask<Integer, Integer, Integer> {
+        private Bitmap image;
+        private int maxSize;
+        public UpdateAsyncTask(Bitmap image,int maxSize) {
+            super();
+            this.image = image;
+            this.maxSize = maxSize;
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... integers) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+            int options = 100;
+            while ( baos.toByteArray().length / 1024>maxSize) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
+                baos.reset();//重置baos即清空baos
+                image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+                options -= 10;//每次都减少10
+            }
+            ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());//把压缩后的数据baos存放到ByteArrayInputStream中
+            Bitmap bitmap = BitmapFactory.decodeStream(isBm, null, null);//把ByteArrayInputStream数据生成图片
+            image = bitmap;
+            return 1;
+        }
+
+        protected void onPreExecute() {
+            Log.d("tag", "开始执行");
+        }
+
+        protected void onProgressUpdate(Integer... values) {
+        }
+
+        protected void onPostExecute(Integer result) {
+        }
+    }
+
 }
