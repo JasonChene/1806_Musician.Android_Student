@@ -150,6 +150,7 @@ public class AudioTeachActivity extends AppCompatActivity {
         }
         public void onUserOffline(int uid, int reason)
         {
+            isJoinInRoom = false;
             final int status = reason;
             runOnUiThread(new Runnable() {
                 @Override
@@ -160,8 +161,6 @@ public class AudioTeachActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            isJoinInRoom = true;
         }
         public void onUserJoined( int uid, int elapsed )
         {
@@ -687,7 +686,6 @@ public class AudioTeachActivity extends AppCompatActivity {
         final FrameLayout local_video = findViewById(R.id.local_video_view_container);
         /* 返回键 */
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-//            if (main_draw.getVisibility() == GONE) {
                 if (local_video.getVisibility() == GONE) {
                     sendMessageToTeacher("studentOffline","studentOffline");
                     this.finish();
@@ -696,17 +694,12 @@ public class AudioTeachActivity extends AppCompatActivity {
                     Toast.makeText(AudioTeachActivity.this, "现在正在与老师视频", Toast.LENGTH_SHORT).show();
                     return false;
                 }
-//            } else {
-//                Toast.makeText(AudioTeachActivity.this, "现在正在与学生教学", Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
         }
         return super.onKeyDown(keyCode,event);
     }
 
     @Override
     protected void onDestroy() {
-        Log.e("TAG", "onDestroy");
         leaveChannel();
         mRtcEngine.destroy();
         sendMessageToTeacher("通知老师学生下线","学生下线");
